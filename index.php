@@ -2,8 +2,7 @@
 
 	require_once "model/iGetIt.php";
 	session_save_path("sess");
-	session_start(); 	
-	$dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
+	session_start();
 	ini_set('display_errors', 'On');
 
 	$errors=array();
@@ -33,9 +32,6 @@
 				$errors[]='password is required';
 			}
 			if(!empty($errors))break;
-			
-			$result = pg_prepare($dbconn, "loginQuery", "SELECT * FROM appuser where username=$1 and password=$2");
-			$result = pg_execute($dbconn, "loginQuery", array($_REQUEST['user'], $_REQUEST['password']));
 
 			// checks user login, and if exists, then go to landing page
 			if($row = $_SESSION['iGetIt']->validateLogin($_REQUEST['user'], $_REQUEST['password'])){
