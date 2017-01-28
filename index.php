@@ -16,9 +16,10 @@
 	}
 
 	function extractInfo($row){
-        $_REQUEST['firstName']=$row['fname'];
-        $_REQUEST['lastName']=$row['lname'];
-        $_REQUEST['email']=$row['email'];
+	    $_SESSION['user']=$row['username'];
+        $_SESSION['firstName']=$row['fname'];
+        $_SESSION['lastName']=$row['lname'];
+        $_SESSION['email']=$row['email'];
     }
 
 	switch($_SESSION['state']){
@@ -58,9 +59,9 @@
 					$_SESSION['state']='profile';
 					$view="profile.php";
 				}
-                $_REQUEST['firstName']="";
-                $_REQUEST['lastName']="";
-                $_REQUEST['email']="";
+                $_SESSION['firstName']="";
+                $_SESSION['lastName']="";
+                $_SESSION['email']="";
 			}
 			break;
 
@@ -123,7 +124,7 @@
 
 
             if($_REQUEST['submit']=="create"){
-                $instructor=$_REQUEST['firstName'] . $_REQUEST['lastName'];
+                $instructor=$_SESSION['firstName'] . $_SESSION['lastName'];
                 $_SESSION['iGetIt']->createClass($dbconn,$_REQUEST['class'], $instructor, $_REQUEST['code']);
                 $_SESSION['state']='instructor_current';
                 $view="instructor_currentclass.php";
