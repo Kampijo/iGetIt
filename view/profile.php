@@ -2,9 +2,6 @@
 // So I don't have to deal with unset $_REQUEST['user'] when refilling the form
 $_REQUEST['user']=!empty($_REQUEST['user']) ? $_REQUEST['user'] : '';
 $_REQUEST['password']=!empty($_REQUEST['password']) ? $_REQUEST['password'] : '';
-$_SESSION['firstName']=!empty($_SESSION['firstName']) ? $_SESSION['firstName'] : '';
-$_SESSION['lastName']=!empty($_SESSION['lastName']) ? $_SESSION['lastName'] : '';
-$_SESSION['email']=!empty($_SESSION['email']) ? $_SESSION['email'] : '';
 ?>
 
 <!DOCTYPE html>

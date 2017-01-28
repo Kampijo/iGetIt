@@ -1,3 +1,7 @@
+<?php
+$dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -29,11 +33,11 @@
 			<h1>Class</h1>
 			<form>
 				<fieldset>
-					<legend> CSC309 Arnold Rosenbloom </legend>
+					<legend> <?php echo($_SESSION['courses']) ?> </legend>
 					<table style="width:100%;">
 						<tr>
-							<td><a style="background-color:green;" href="">i Get It</a></td>
-							<td><a style="background-color:red;  " href="">i Don't Get It</a></td>
+							<td><a style="background-color:green;" href="<?php $_SESSION['iGetIt']->studentResponse($dbconn,$_SESSION['courses'],1)?>">i Get It</a></td>
+							<td><a style="background-color:red;  " href="<?php $_SESSION['iGetIt']->studentResponse($dbconn,$_SESSION['courses'],0)?>">i Don't Get It</a></td>
 						</tr>
 					</table>
 				</fieldset>
