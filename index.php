@@ -128,7 +128,6 @@
             } else {
                 if($row = $_SESSION['iGetIt']->checkClass($dbconn,$_REQUEST['courses'],$_REQUEST['code'])){
                     $_SESSION['state']='instructor_current';
-                    $_SESSION['courses']=$_REQUEST['courses'];
                     $view="instructor_currentclass.php";
                 } else {
                     $errors[]= 'incorrect code';
@@ -154,7 +153,6 @@
 
             if($row = $_SESSION['iGetIt']->checkClass($dbconn,$_REQUEST['courses'],$_REQUEST['code'])){
                 $_SESSION['state']='student_current';
-                $_SESSION['courses']=$_REQUEST['courses'];
                 $view="student_currentclass.php";
             } else {
                 $errors[]= 'incorrect code';

@@ -33,11 +33,11 @@ $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopezn
 			<h1>Class</h1>
 			<form>
 				<fieldset>
-					<legend> <?php echo($_SESSION['courses']) ?> </legend>
+					<legend> <?php echo($_SESSION['iGetIt']->current_course) ?> </legend>
 					<table style="width:100%;">
 						<tr>
-							<td><a style="background-color:green;" href="<?php $_SESSION['iGetIt']->studentResponse($dbconn,$_SESSION['courses'],1)?>">i Get It</a></td>
-							<td><a style="background-color:red;  " href="<?php $_SESSION['iGetIt']->studentResponse($dbconn,$_SESSION['courses'],0)?>">i Don't Get It</a></td>
+							<td><a style="background-color:green;" href="<?php $_SESSION['iGetIt']->studentResponse($dbconn,1)?>">i Get It</a></td>
+							<td><a style="background-color:red;  " href="<?php $_SESSION['iGetIt']->studentResponse($dbconn,0)?>">i Don't Get It</a></td>
 						</tr>
 					</table>
 				</fieldset>

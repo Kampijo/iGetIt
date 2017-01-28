@@ -28,7 +28,7 @@
 			<h1>Class</h1>
 			<form>
 				<fieldset>
-					<legend> <?php echo($_SESSION['courses']) ?></legend>
+					<legend> <?php echo($_SESSION['iGetIt']->current_course) ?></legend>
 					<span style="background-color:green; width:50%;">i Get It</span>
 					<span style="background-color:red;  width:50%;">i Don't Get It</span>
 				</fieldset>
