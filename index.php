@@ -84,7 +84,7 @@
               // Otherwise, create the user and move to selected landing page (i.e. instructor or student)
             } else {
                 $_SESSION['iGetIt']->createUser($dbconn,$_REQUEST['user'],$_REQUEST['password'],$_REQUEST['firstName'],
-                    $_REQUEST['lastName'],$_REQUEST['email']);
+                    $_REQUEST['lastName'],$_REQUEST['email'],$_REQUEST['type']);
                 if($_REQUEST['type']=="instructor"){
                     $_SESSION['state']='instructor_create';
                     $view="instructor_createclass.php";

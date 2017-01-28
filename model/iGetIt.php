@@ -17,9 +17,9 @@ class iGetIt {
         $result = pg_execute($dbconn, "userQuery", array($user));
         return pg_fetch_array($result);
     }
-    public function createUser($dbconn, $user, $password, $fName, $lName, $email){
+    public function createUser($dbconn, $user, $password, $fName, $lName, $email, $type){
         $result = pg_prepare($dbconn, "insertUser", "INSERT INTO appuser values($1,$2,$3,$4,$5)");
-        $result = pg_execute($dbconn, "insertUser", array($user, $password, $fName, $lName, $email));
+        $result = pg_execute($dbconn, "insertUser", array($user, $password, $fName, $lName, $email, $type));
     }
     public function getAvailableClasses(){}
     public function createClass(){}
