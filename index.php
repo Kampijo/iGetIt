@@ -114,9 +114,7 @@
                 break;
             }
 
-            if(empty($_REQUEST['class'])) {
-                $errors[] = 'class name required';
-            } if (empty($_REQUEST['code'])) {
+            if (empty($_REQUEST['code'])) {
                 $errors[] = 'code required';
             }
 
@@ -124,6 +122,10 @@
 
 
             if($_REQUEST['submit']=="create"){
+                if(empty($_REQUEST['class'])) {
+                    $errors[] = 'class name required';
+                    break;
+                }
                 $instructor=$_SESSION['firstName'] . " " . $_SESSION['lastName'];
                 $_SESSION['iGetIt']->createClass($dbconn,$_REQUEST['class'], $instructor, $_REQUEST['code']);
                 $_SESSION['state']='instructor_current';
