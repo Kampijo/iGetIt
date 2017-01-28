@@ -16,7 +16,7 @@
 		</nav>
 		<main>
 			<h1>Class</h1>
-			<form method="post">
+			<form method="post" id="courses">
 				<fieldset>
                     <legend>Current Classes</legend>
                     <?php echo "<select name='courses' form='courses'>";
