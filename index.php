@@ -85,8 +85,8 @@
               } if (empty($_REQUEST['email'])){
                   $errors[]='email is required';
               }
-              $_SESSION['iGetIt']->validateForm($errors,$_REQUEST['user'],$_REQUEST['password'],$_REQUEST['firstName'],
-                  $_REQUEST['lastName'],$_REQUEST['email']);
+              array_merge($errors,$_SESSION['iGetIt']->validateForm($_REQUEST['user'],$_REQUEST['password'],$_REQUEST['firstName'],
+                  $_REQUEST['lastName'],$_REQUEST['email']));
 
             if(!empty($errors))break;
 

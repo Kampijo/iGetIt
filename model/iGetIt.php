@@ -11,13 +11,14 @@ class iGetIt {
         $input = htmlspecialchars($input);
         return $input;
     }
-    public function validateForm($errors, $user, $password, $fName, $lName, $email){
+    public function validateForm($user, $password, $fName, $lName, $email){
         $user=$this->validateInput($user);
         $password=$this->validateInput($password);
         $fName=$this->validateInput($fName);
         $lName=$this->validateInput($lName);
         $email=$this->validateInput($email);
 
+        $errors=array();
         if (!preg_match("/^[a-zA-Z0-9 ]*$/", $user)) {
             $errors[]='username can only contain letters and numbers';
         }
@@ -33,6 +34,7 @@ class iGetIt {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Invalid email";
         }
+        return $errors;
     }
 	public function checkLogin($dbconn, $user, $password){
         $user=$this->validateInput($user);
