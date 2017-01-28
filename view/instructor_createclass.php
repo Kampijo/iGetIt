@@ -16,26 +16,30 @@
 		</nav>
 		<main>
 			<h1>Class</h1>
-			<form>
+			<form method="post">
 				<fieldset>
 					<legend>Create Class</legend>
-   					<p> <label for="class">class</label><input type="text" name="class"></input> </p>
-   					<p> <label for="code">code</label><input type="text" name="code"></input> </p>
-                                        <p> <input type="submit" />
+   					<p> <label for="class">class</label><input type="text" name="class"></p>
+   					<p> <label for="code">code</label><input type="text" name="code"></p>
+                    <p> <input type="submit" name="submit" value="create" />
 				</fieldset>
 			</form>
- 			<form>
-                                <fieldset>
-                                        <legend>Current Classes</legend>
-                                        <select>
-                                                <option>CSC258 Larry Zhang</option>
-                                                <option>CSC309 Arnold Rosenbloom</option>
-                                                <option>CSC363 Arnold Rosenbloom</option>
-                                        </select>
-                                        <p> <label for="code">code</label><input type="text" name="code"></input> </p>
-                                        <p> <input type="submit" />
-                                </fieldset>
-                        </form>
+ 			<form method="post" id="courses">
+                <fieldset>
+                    <legend>Current Classes</legend>
+                    <?php echo "<select name='courses' form='courses'>";
+                        while($row=pg_fetch_array($_SESSION['iGetIt']->getAvailableClasses($_SESSION['dbconn'])))
+                        {
+                        echo '<option value="' . $row['name'] . '">'
+                            . $row['name'] . " " . $row['instructor']
+                            . '</option>';
+                        }
+                        echo '</select>';
+                    ?>
+                    <p> <label for="code">code</label><input type="text" name="code"> </p>
+                    <p> <input type="submit" name="submit" value="join" />
+                </fieldset>
+            </form>
 
 		</main>
 		<footer>

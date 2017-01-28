@@ -13,6 +13,7 @@
 	if(!isset($_SESSION['state'])){
 		$_SESSION['state']='login';
 		$_SESSION['iGetIt']=new iGetIt();
+		$_SESSION['dbconn']=$dbconn;
 	}
 
 	switch($_SESSION['state']){

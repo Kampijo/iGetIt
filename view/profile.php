@@ -2,6 +2,9 @@
 // So I don't have to deal with unset $_REQUEST['user'] when refilling the form
 $_REQUEST['user']=!empty($_REQUEST['user']) ? $_REQUEST['user'] : '';
 $_REQUEST['password']=!empty($_REQUEST['password']) ? $_REQUEST['password'] : '';
+$_REQUEST['firstName']=!empty($_REQUEST['password']) ? $_REQUEST['firstName'] : '';
+$_REQUEST['lastName']=!empty($_REQUEST['password']) ? $_REQUEST['lastName'] : '';
+$_REQUEST['email']=!empty($_REQUEST['password']) ? $_REQUEST['email'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -28,9 +31,9 @@ $_REQUEST['password']=!empty($_REQUEST['password']) ? $_REQUEST['password'] : ''
 					<legend>Edit Profile</legend>
 					<p> <label for="user">User</label>    <input type="text" name="user" value="<?php echo($_REQUEST['user']); ?>"> </p>
 					<p> <label for="password">Password</label><input type="password" name="password" value="<?php echo($_REQUEST['password']); ?>"> </p>
-					<p> <label for="firstName">First Name</label><input type="text" name="firstName"> </p>
-					<p> <label for="lastName">Last Name</label><input type="text" name="lastName"> </p>
-					<p> <label for="email">email</label><input type="text" name="email"> </p>
+					<p> <label for="firstName">First Name</label><input type="text" name="firstName" value="<?php echo($_REQUEST['firstName']); ?>"> </p>
+					<p> <label for="lastName">Last Name</label><input type="text" name="lastName" value="<?php echo($_REQUEST['lastName']); ?>"> </p>
+					<p> <label for="email">email</label><input type="text" name="email" value="<?php echo($_REQUEST['email']); ?>"> </p>
 					<p> <label for="type">type</label>
 						<input type="radio" name="type" value="instructor" checked>instructor</input>
 						<input type="radio" name="type" value="student">student</input>
