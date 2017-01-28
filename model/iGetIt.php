@@ -17,11 +17,6 @@ class iGetIt {
         $fName=$this->validateInput($fName);
         $lName=$this->validateInput($lName);
         $email=$this->validateInput($email);
-        echo $user;
-        echo $password;
-        echo $fName;
-        echo $lName;
-        echo $email;
 
         $errors=array();
         if (!preg_match("/^[a-zA-Z0-9 ]*$/", $user)) {
@@ -39,7 +34,6 @@ class iGetIt {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Invalid email";
         }
-        echo $errors;
         return $errors;
     }
 	public function checkLogin($dbconn, $user, $password){
