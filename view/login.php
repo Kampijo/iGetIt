@@ -23,7 +23,7 @@ $_REQUEST['password']=!empty($_REQUEST['password']) ? $_REQUEST['password'] : ''
 -->
 <main>
     <h1>Login</h1>
-    <form method="post">
+    <form method="post" novalidate>
         <fieldset>
             <legend>Login</legend>
             <p> <label for="user">User</label>    <input type="text" name="user" value="<?php echo($_REQUEST['user']); ?>" </p>

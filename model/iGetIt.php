@@ -5,18 +5,54 @@ class iGetIt {
 	public function __construct() {
 
     }
+    public function validateInput($input){
+        $input = trim($input);
+        $input = stripslashes($input);
+        $input = htmlspecialchars($input);
+        return $input;
+    }
+    public function validateForm($errors, $user, $password, $fName, $lName, $email){
+        $user=$this->validateInput($user);
+        $password=$this->validateInput($password);
+        $fName=$this->validateInput($fName);
+        $lName=$this->validateInput($lName);
+        $email=$this->validateInput($email);
 
-	public function validateLogin($dbconn, $user, $password){
+        if (!preg_match("/^[a-zA-Z0-9 ]*$/", $user)) {
+            $errors[]='username can only contain letters and numbers';
+        }
+        if (!preg_match("/^[a-zA-Z0-9 ]*$/", $password)) {
+            $errors[]='password can only contain letters and numbers';
+        }
+        if (!preg_match("/^[a-zA-Z ]*$/", $fName)) {
+            $errors[]='first name can only contain letters';
+        }
+        if (!preg_match("/^[a-zA-Z ]*$/", $lName)) {
+            $errors[]='last name can only contain letters';
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Invalid email";
+        }
+    }
+	public function checkLogin($dbconn, $user, $password){
+        $user=$this->validateInput($user);
+        $password=$this->validateInput($password);
         $result = pg_prepare($dbconn, "loginQuery", "SELECT * FROM appuser where username=$1 and password=$2");
         $result = pg_execute($dbconn, "loginQuery", array($user, $password));
         return pg_fetch_array($result);
 	}
-    public function validateUser($dbconn, $user){
+    public function checkUser($dbconn, $user){
+	    $user=$this->validateInput($user);
         $result = pg_prepare($dbconn, "userQuery", "SELECT * FROM appuser where username=$1");
         $result = pg_execute($dbconn, "userQuery", array($user));
         return pg_fetch_array($result);
     }
     public function createUser($dbconn, $user, $password, $fName, $lName, $email, $type){
+        $user=$this->validateInput($user);
+        $password=$this->validateInput($password);
+        $fName=$this->validateInput($fName);
+        $lName=$this->validateInput($lName);
+        $email=$this->validateInput($email);
         $result = pg_prepare($dbconn, "insertUser", "INSERT INTO appuser values($1,$2,$3,$4,$5,$6)");
         $result = pg_execute($dbconn, "insertUser", array($user, $password, $fName, $lName, $email, $type));
     }

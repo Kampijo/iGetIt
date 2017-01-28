@@ -16,7 +16,7 @@
 		</nav>
 		<main>
 			<h1>Class</h1>
-			<form method="post" id="courses">
+			<form method="post" id="courses" novalidate>
 				<fieldset>
                     <legend>Current Classes</legend>
                     <?php echo "<select name='courses' form='courses'>";

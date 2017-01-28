@@ -26,7 +26,7 @@ $_SESSION['email']=!empty($_SESSION['email']) ? $_SESSION['email'] : '';
 		</nav>
 		<main>
 			<h1>Profile</h1>
-			<form method=post>
+			<form method=post novalidate>
 				<fieldset>
 					<legend>Edit Profile</legend>
 					<p> <label for="user">User</label>    <input type="text" name="user" value="<?php echo($_REQUEST['user']); ?>"> </p>
