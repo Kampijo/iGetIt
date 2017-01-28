@@ -5,6 +5,7 @@
 	session_start();
 	ini_set('display_errors', 'On');
 
+    $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
 	$errors=array();
 	$view="";
 
@@ -34,7 +35,7 @@
 			if(!empty($errors))break;
 
 			// checks user login, and if exists, then go to landing page
-			if($row = $_SESSION['iGetIt']->validateLogin($_REQUEST['user'], $_REQUEST['password'])){
+			if($row = $_SESSION['iGetIt']->validateLogin($dbconn,$_REQUEST['user'], $_REQUEST['password'])){
 			    if($row["type"]=="instructor"){
                     $_SESSION['state']='instructor_create';
                     $view="instructor_createclass.php";
@@ -44,7 +45,7 @@
                 }
                 // if does not exist, then go to profile
 			} else {
-				if($row = $_SESSION['iGetIt']->validateUser($_REQUEST['user'])){
+				if($row = $_SESSION['iGetIt']->validateUser($dbconn,$_REQUEST['user'])){
 					$errors[]='invalid login';
 				} else {
 					$_SESSION['state']='profile';
@@ -77,12 +78,12 @@
               }
 
               // check if username taken
-            if($row = $_SESSION['iGetIt']->validateUser($_REQUEST['user'])){
+            if($row = $_SESSION['iGetIt']->validateUser($dbconn,$_REQUEST['user'])){
                   $errors[]='user already exists';
 
               // Otherwise, create the user and move to selected landing page (i.e. instructor or student)
             } else {
-                $_SESSION['iGetIt']->createUser($_REQUEST['user'],$_REQUEST['password'],$_REQUEST['firstName'],
+                $_SESSION['iGetIt']->createUser($dbconn,$_REQUEST['user'],$_REQUEST['password'],$_REQUEST['firstName'],
                     $_REQUEST['lastName'],$_REQUEST['email']);
                 if($_REQUEST['type']=="instructor"){
                     $_SESSION['state']='instructor_create';
