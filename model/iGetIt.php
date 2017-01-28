@@ -18,7 +18,7 @@ class iGetIt {
         return pg_fetch_array($result);
     }
     public function createUser($dbconn, $user, $password, $fName, $lName, $email, $type){
-        $result = pg_prepare($dbconn, "insertUser", "INSERT INTO appuser values($1,$2,$3,$4,$5)");
+        $result = pg_prepare($dbconn, "insertUser", "INSERT INTO appuser values($1,$2,$3,$4,$5,$6)");
         $result = pg_execute($dbconn, "insertUser", array($user, $password, $fName, $lName, $email, $type));
     }
     public function getAvailableClasses(){}
