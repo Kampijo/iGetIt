@@ -146,11 +146,35 @@
 
             $view="student_joinclass.php";
 
+            if(empty($_REQUEST['submit']) || $_REQUEST['submit']!="join"){
+                break;
+            }
+
+            if (empty($_REQUEST['code'])) {
+                $errors[] = 'code required';
+            }
+
+            if(!empty($errors))break;
+
+            if($row = $_SESSION['iGetIt']->checkClass($dbconn,$_REQUEST['courses'],$_REQUEST['code'])){
+                $_SESSION['state']='student_current';
+                $view="student_currentclass.php";
+            } else {
+                $errors[]= 'incorrect code';
+            }
+
+
             break;
 
         case "instructor_current":
 
             $view="instructor_currentclass.php";
+
+            break;
+
+        case "student_current":
+
+            $view="student_currentclass.php";
 
             break;
 

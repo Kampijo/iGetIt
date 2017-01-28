@@ -18,14 +18,20 @@
 			<h1>Class</h1>
 			<form>
 				<fieldset>
-					<legend>Current Classes</legend>
-					<select>
-						<option>CSC258 Larry Zhang</option>
-						<option>CSC309 Arnold Rosenbloom</option>
-						<option>CSC363 Arnold Rosenbloom</option>
-					</select>
-   					<p> <label for="code">code</label><input type="text" name="code"></input> </p>
-                                        <p> <input type="submit" />
+                    <legend>Current Classes</legend>
+                    <?php echo "<select name='courses' form='courses'>";
+                    $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
+                    $result=$_SESSION['iGetIt']->getAvailableClasses($dbconn);
+                    while($row=pg_fetch_array($result))
+                    {
+                        echo "<option value='" . $row['name'] . "'>"
+                            . $row['name'] . " " . $row['instructor'] . "</option > ";
+                    }
+                    echo '</select>';
+                    ?>
+                    <p> <label for="code">code</label><input type="text" name="code"> </p>
+                    <p> <input type="submit" name="submit" value="join" />
+                        <?php echo(view_errors($errors)); ?>
 				</fieldset>
 			</form>
 		</main>
