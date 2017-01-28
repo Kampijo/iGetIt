@@ -16,8 +16,8 @@
 	}
 
 	function extractInfo($row){
-        $_REQUEST['firstName']=$row['fName'];
-        $_REQUEST['lastName']=$row['lName'];
+        $_REQUEST['firstName']=$row['fname'];
+        $_REQUEST['lastName']=$row['lname'];
         $_REQUEST['email']=$row['email'];
     }
 
