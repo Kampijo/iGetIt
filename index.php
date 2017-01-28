@@ -1,6 +1,6 @@
 <?php
 
-	require_once "model/GuessGame.php";
+	require_once "model/iGetIt.php";
 	session_save_path("sess");
 	session_start(); 	
 	$dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
@@ -12,6 +12,7 @@
 	/* controller code */
 	if(!isset($_SESSION['state'])){
 		$_SESSION['state']='login';
+		$_SESSION['iGetIt']=new iGetIt();
 	}
 
 	switch($_SESSION['state']){
@@ -36,15 +37,18 @@
 			$result = pg_prepare($dbconn, "loginQuery", "SELECT * FROM appuser where username=$1 and password=$2");
 			$result = pg_execute($dbconn, "loginQuery", array($_REQUEST['user'], $_REQUEST['password']));
 
-			// perform operation, switching state and view if necessary
-			if($row = pg_fetch_array($result)){
-				$_SESSION['state']='profile';
-				$view="profile.php";
+			// checks user login, and if exists, then go to landing page
+			if($row = $_SESSION['iGetIt']->validateLogin($_REQUEST['user'], $_REQUEST['password'])){
+			    if($row["type"]=="instructor"){
+                    $_SESSION['state']='instructor_create';
+                    $view="instructor_createclass.php";
+                } else {
+                    $_SESSION['state']='student_join';
+                    $view="student_joinclass.php";
+                }
+                // if does not exist, then go to profile
 			} else {
-				$result = pg_prepare($dbconn, "userQuery", "SELECT * FROM appuser where username=$1");
-				$result = pg_execute($dbconn, "userQuery", array($_REQUEST['user']));
-				
-				if($row = pg_fetch_array($result)){
+				if($row = $_SESSION['iGetIt']->validateUser($_REQUEST['user'])){
 					$errors[]='invalid login';
 				} else {
 					$_SESSION['state']='profile';
@@ -61,16 +65,48 @@
               if(empty($_REQUEST['submit']) || $_REQUEST['submit']!="Submit"){
                   break;
               }
+              if(!empty($errors))break;
   
               // validate and set errors
-              if(empty($_REQUEST['password'])){
+              if(empty($_REQUEST['user'])) {
+                  $errors[] = 'password is required';
+              } if(empty($_REQUEST['password'])){
                   $errors[]='password is required';
+              } if(empty($_REQUEST['firstName'])){
+                $errors[]='first name is required';
+              } if (empty($_REQUEST['lastName'])){
+                  $errors[]='last name is required';
+              } if (empty($_REQUEST['email'])){
+                  $errors[]='email is required';
               }
-			
-              if(!empty($errors))break;
-			
-			
+
+              // check if username taken
+            if($row = $_SESSION['iGetIt']->validateUser($_REQUEST['user'])){
+                  $errors[]='user already exists';
+
+              // Otherwise, create the user and move to selected landing page (i.e. instructor or student)
+            } else {
+                $_SESSION['iGetIt']->createUser($_REQUEST['user'],$_REQUEST['password'],$_REQUEST['firstName'],
+                    $_REQUEST['lastName'],$_REQUEST['email']);
+                if($_REQUEST['type']=="instructor"){
+                    $_SESSION['state']='instructor_create';
+                    $view="instructor_createclass.php";
+                }else{
+                    $_SESSION['state']='student_join';
+                    $view="student_joinclass.php";
+                }
+            }
 			break;
+
+        case "instructor_create":
+
+            $view="instructor_createclass.php";
+
+            break;
+
+        case "student_join":
+
+            $view="student_joinclass.php";
 
 	}
 	require_once "view/view_lib.php";

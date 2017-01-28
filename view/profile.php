@@ -1,3 +1,9 @@
+<?php
+// So I don't have to deal with unset $_REQUEST['user'] when refilling the form
+$_REQUEST['user']=!empty($_REQUEST['user']) ? $_REQUEST['user'] : '';
+$_REQUEST['password']=!empty($_REQUEST['password']) ? $_REQUEST['password'] : '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -26,10 +32,11 @@
 					<p> <label for="lastName">Last Name</label><input type="text" name="lastName"></input> </p>
 					<p> <label for="email">email</label><input type="text" name="email"></input> </p>
 					<p> <label for="type">type</label>
-						<input type="radio" name="type">instructor</input> 
-						<input type="radio" name="type">student</input> 
+						<input type="radio" name="type" value="instructor" checked>instructor</input>
+						<input type="radio" name="type" value="student">student</input>
 					</p>
 					<p> <input type="submit" name="submit" value="Submit" />
+                        <?php echo(view_errors($errors)); ?>
 				</fieldset>
 			</form>
 		</main>
