@@ -28,12 +28,13 @@
                 <fieldset>
                     <legend>Current Classes</legend>
                     <?php echo "<select name='courses' form='courses'>";
-                       // while($row=pg_fetch_array($_SESSION['iGetIt']->getAvailableClasses($_SESSION['dbconn'])))
-                        //{
-                          //  echo '<option value="' . $row['name'] . '">'
-                           // . $row['name'] . " " . $row['instructor']
-                           // . '</option>';
-                        //}
+                       $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
+                       $result=$_SESSION['iGetIt']->getAvailableClasses($dbconn);
+                       while($row=pg_fetch_array($result))
+                        {
+                            echo "<option value='" . $row['name'] . "'>"
+                                . $row['name'] . " " . $row['instructor'] . "</option > ";
+                        }
                         echo '</select>';
                     ?>
                     <p> <label for="code">code</label><input type="text" name="code"> </p>
