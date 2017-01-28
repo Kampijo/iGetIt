@@ -10,6 +10,6 @@ create table classes (
 	name varchar(20),
 	instructor varchar(50),
 	code varchar(50), 
+	igetit INTEGER,
+	idontgetit INTEGER,
 	PRIMARY KEY(name,instructor));
-
-
