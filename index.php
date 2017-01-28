@@ -132,6 +132,8 @@
                 if($row = $_SESSION['iGetIt']->checkClass($dbconn,$_REQUEST['courses'],$_REQUEST['code'])){
                     $_SESSION['state']='instructor_current';
                     $view="instructor_currentclass.php";
+                } else {
+                    $errors[]= 'incorrect code';
                 }
 
             }

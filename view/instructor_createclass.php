@@ -39,6 +39,7 @@
                     ?>
                     <p> <label for="code">code</label><input type="text" name="code"> </p>
                     <p> <input type="submit" name="submit" value="join" />
+                        <?php echo(view_errors($errors)); ?>
                 </fieldset>
             </form>
 
