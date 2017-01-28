@@ -27,7 +27,7 @@ $_REQUEST['password']=!empty($_REQUEST['password']) ? $_REQUEST['password'] : ''
 				<fieldset>
 					<legend>Edit Profile</legend>
 					<p> <label for="user">User</label>    <input type="text" name="user" value="<?php echo($_REQUEST['user']); ?>"> </p>
-					<p> <label for="password">Password</label><input type="password" name="password" value=""<?php echo($_REQUEST['user']); ?>""> </p>
+					<p> <label for="password">Password</label><input type="password" name="password" value="<?php echo($_REQUEST['password']); ?>"> </p>
 					<p> <label for="firstName">First Name</label><input type="text" name="firstName"> </p>
 					<p> <label for="lastName">Last Name</label><input type="text" name="lastName"> </p>
 					<p> <label for="email">email</label><input type="text" name="email"> </p>
