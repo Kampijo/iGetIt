@@ -2,7 +2,7 @@
 
 class iGetIt {
 
-	public $dbconn;
+	private $dbconn;
 
 	public function __construct() {
         	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
@@ -16,7 +16,7 @@ class iGetIt {
     public function validateUser($user){
         $result = pg_prepare($this->dbconn, "userQuery", "SELECT * FROM appuser where username=$1");
         $result = pg_execute($this->dbconn, "userQuery", array($user));
-        return pg_fetch_array($this->result);
+        return pg_fetch_array($result);
     }
     public function createUser($user, $password, $fName, $lName, $email){
         $result = pg_prepare($this->dbconn, "insertUser", "INSERT INTO appuser values($1,$2,$3,$4,$5)");
