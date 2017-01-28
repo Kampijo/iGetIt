@@ -25,6 +25,9 @@ class iGetIt {
         $result = pg_execute($dbconn, "getClasses", array());
         return $result;
     }
-    public function createClass(){}
+    public function createClass($dbconn, $name, $instructor, $code){
+        $result = pg_prepare($dbconn, "insertUser", "INSERT INTO classes values($1,$2,$3)");
+        $result = pg_execute($dbconn, "insertUser", array($name,$instructor,$code));
+    }
 }
 ?>

@@ -15,6 +15,12 @@
 		$_SESSION['iGetIt']=new iGetIt();
 	}
 
+	function extractInfo($row){
+        $_REQUEST['firstName']=$row['fName'];
+        $_REQUEST['lastName']=$row['lName'];
+        $_REQUEST['email']=$row['email'];
+    }
+
 	switch($_SESSION['state']){
 		case "login":
 			// the view we display by default
@@ -36,13 +42,14 @@
 
 			// checks user login, and if exists, then go to landing page
 			if($row = $_SESSION['iGetIt']->validateLogin($dbconn,$_REQUEST['user'], $_REQUEST['password'])){
-			    if($row["type"]=="instructor"){
+			    if($row['type']=="instructor"){
                     $_SESSION['state']='instructor_create';
                     $view="instructor_createclass.php";
                 } else {
                     $_SESSION['state']='student_join';
                     $view="student_joinclass.php";
                 }
+                extractInfo($row);
                 // if does not exist, then go to profile
 			} else {
 				if($row = $_SESSION['iGetIt']->validateUser($dbconn,$_REQUEST['user'])){
@@ -51,6 +58,9 @@
 					$_SESSION['state']='profile';
 					$view="profile.php";
 				}
+                $_REQUEST['firstName']="";
+                $_REQUEST['lastName']="";
+                $_REQUEST['email']="";
 			}
 			break;
 
@@ -59,23 +69,23 @@
 			$view="profile.php";
 			
 			  // check if submit or not
-              if(empty($_REQUEST['submit']) || $_REQUEST['submit']!="Submit"){
+              if(empty($_REQUEST['submit']) || $_REQUEST['submit']!="Submit") {
                   break;
               }
-              if(!empty($errors))break;
-  
               // validate and set errors
               if(empty($_REQUEST['user'])) {
                   $errors[] = 'password is required';
               } if(empty($_REQUEST['password'])){
                   $errors[]='password is required';
               } if(empty($_REQUEST['firstName'])){
-                $errors[]='first name is required';
+                  $errors[]='first name is required';
               } if (empty($_REQUEST['lastName'])){
                   $errors[]='last name is required';
               } if (empty($_REQUEST['email'])){
                   $errors[]='email is required';
               }
+
+            if(!empty($errors))break;
 
               // check if username taken
             if($row = $_SESSION['iGetIt']->validateUser($dbconn,$_REQUEST['user'])){
@@ -99,11 +109,43 @@
 
             $view="instructor_createclass.php";
 
+            if(empty($_REQUEST['submit']) || ($_REQUEST['submit']!="create" && $_REQUEST['submit']!="join")){
+                break;
+            }
+
+            if(empty($_REQUEST['class'])) {
+                $errors[] = 'class name required';
+            } if (empty($_REQUEST['code'])) {
+                $errors[] = 'code required';
+            }
+
+            if(!empty($errors))break;
+
+
+            if($_REQUEST['submit']=="create"){
+                $instructor=$_REQUEST['firstName'] . $_REQUEST['lastName'];
+                $_SESSION['iGetIt']->createClass($dbconn,$_REQUEST['class'], $instructor, $_REQUEST['code']);
+                $_SESSION['state']='instructor_current';
+                $view="instructor_currentclass.php";
+            } else {
+                $_SESSION['state']='instructor_current';
+                $view="instructor_currentclass.php";
+            }
+
             break;
 
         case "student_join":
 
             $view="student_joinclass.php";
+
+            break;
+
+        case "instructor_current":
+
+            $view="instructor_currentclass.php";
+
+            break;
+
 
 	}
 	require_once "view/view_lib.php";
