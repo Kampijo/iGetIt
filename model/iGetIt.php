@@ -26,8 +26,13 @@ class iGetIt {
         return $result;
     }
     public function createClass($dbconn, $name, $instructor, $code){
-        $result = pg_prepare($dbconn, "insertUser", "INSERT INTO classes values($1,$2,$3)");
-        $result = pg_execute($dbconn, "insertUser", array($name,$instructor,$code));
+        $result = pg_prepare($dbconn, "insertClass", "INSERT INTO classes values($1,$2,$3)");
+        $result = pg_execute($dbconn, "insertClass", array($name,$instructor,$code));
+    }
+    public function checkClass($dbconn, $name, $code){
+        $result = pg_prepare($dbconn, "checkClass", "SELECT * FROM classes where name=$1 and code=$2");
+        $result = pg_execute($dbconn, "checkClass", array($name,$code));
+        return pg_fetch_array($result);
     }
 }
 ?>
