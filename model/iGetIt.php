@@ -34,6 +34,7 @@ class iGetIt {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Invalid email";
         }
+        echo $errors;
         return $errors;
     }
 	public function checkLogin($dbconn, $user, $password){
