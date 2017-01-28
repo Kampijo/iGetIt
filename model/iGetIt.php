@@ -68,8 +68,8 @@ class iGetIt {
             $result = pg_prepare($dbconn, "theyGetIt", "UPDATE classes SET igetit=igetit+1 WHERE CONCAT(name, ' ', instructor) = $1");
             $result = pg_execute($dbconn, "theyGetIt", array($course));
         } else {
-            $result = pg_prepare($dbconn, "theyGetIt", "UPDATE classes SET idontgetit=idontgetit+1 WHERE CONCAT(name, ' ', instructor) = $1");
-            $result = pg_execute($dbconn, "theyGetIt", array($course));
+            $result = pg_prepare($dbconn, "theyDontGetIt", "UPDATE classes SET idontgetit=idontgetit+1 WHERE CONCAT(name, ' ', instructor) = $1");
+            $result = pg_execute($dbconn, "theyDontGetIt", array($course));
         }
     }
 }
