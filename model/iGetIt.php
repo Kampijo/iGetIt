@@ -67,7 +67,7 @@ class iGetIt {
         return $row;
     }
     public function studentResponse($dbconn,$response){
-        if($response){
+        if($response==1){
             $result = pg_prepare($dbconn, "theyGetIt", "UPDATE classes SET igetit=igetit+1 WHERE CONCAT(name, ' ', instructor) = $1");
             $result = pg_execute($dbconn, "theyGetIt", array($this->current_course));
         } else {
