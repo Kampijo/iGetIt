@@ -32,11 +32,6 @@
 			if(empty($_REQUEST['password'])){
 				$errors[]='password is required';
 			}
-            if(isset($_GET['newuser'])) {
-                $_SESSION['state'] = 'profile';
-                $view = "profile.php";
-                break;
-            }
 			if(!empty($errors))break;
 
 			// checks user login, and if exists, then go to landing page

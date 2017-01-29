@@ -27,7 +27,9 @@
                 <?php echo(view_errors($errors)); ?>
         </fieldset>
     </form>
-    <a href="<?php $_SESSION['state']="profile"; ?>">New Member</a>
+    <form method="post">
+        <input type="submit" name="newuser" value="New Member">
+    </form>
 </main>
 <footer>
 </footer>
