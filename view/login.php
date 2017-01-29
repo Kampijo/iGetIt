@@ -31,7 +31,6 @@ $_REQUEST['user'] = !empty($_REQUEST['user']) ? $_REQUEST['user'] : '';
                 <?php echo(view_errors($errors)); ?>
         </fieldset>
      </form>
-     <a href="?profile">New Member</a>
      <form method="post">
          <input type="submit" name="submit" value="New Member" />
      </form>
