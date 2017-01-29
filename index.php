@@ -22,9 +22,7 @@ switch ($_SESSION['state']) {
         $view = "login.php";
 
         // check if submit or not
-        if (empty($_REQUEST['submit']) || ($_REQUEST['submit'] != "login" && $_REQUEST['submit'] != "Class"
-                && $_REQUEST['submit'] != "Profile" && $_REQUEST['submit'] != "Logout")
-        ) {
+        if (empty($_REQUEST['submit']) || ($_REQUEST['submit'] != "login" && $_REQUEST['submit'] != "New Member")) {
             break;
         }
         // validate and set errors
@@ -37,20 +35,25 @@ switch ($_SESSION['state']) {
 
         if (!empty($errors)) break;
 
-        // checks user login, and if exists, then go to landing page
-        if ($row = $_SESSION['iGetIt']->checkLogin($dbconn, $_REQUEST['user'], $_REQUEST['password'])) {
-            if ($row['type'] == "instructor") {
-                $_SESSION['state'] = 'instructor_create';
-                $view = "instructor_createclass.php";
-            } else {
-                $_SESSION['state'] = 'student_join';
-                $view = "student_joinclass.php";
-            }
-            $_SESSION['iGetIt']->extractInfo($row);
+        if($_REQUEST['submit']=="login") {
+            // checks user login, and if exists, then go to landing page
+            if ($row = $_SESSION['iGetIt']->checkLogin($dbconn, $_REQUEST['user'], $_REQUEST['password'])) {
+                if ($row['type'] == "instructor") {
+                    $_SESSION['state'] = 'instructor_create';
+                    $view = "instructor_createclass.php";
+                } else {
+                    $_SESSION['state'] = 'student_join';
+                    $view = "student_joinclass.php";
+                }
+                $_SESSION['iGetIt']->extractInfo($row);
 
-            // Otherwise, invalid login
+                // Otherwise, invalid login
+            } else {
+                $errors[] = 'invalid login';
+            }
         } else {
-            $errors[] = 'invalid login';
+            $_SESSION['state'] = 'profile';
+            $view = "profile.php";
         }
         break;
 
