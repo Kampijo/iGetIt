@@ -1,6 +1,6 @@
 <?php
     $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
-    if(isset($_GET['response'])){
+    if(isset($_POST['response'])){
         $_SESSION['iGetIt']->studentResponse($dbconn,$_GET['response']);
     }
 ?>
@@ -11,7 +11,7 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<style>
-			td a {
+			td input {
 				background-color:green; 
 				display:block; 
 				width:200px; 
@@ -34,13 +34,13 @@
 		</nav>
 		<main>
 			<h1>Class</h1>
-			<form>
+			<form method="post" action="">
 				<fieldset>
 					<legend> <?php echo($_SESSION['iGetIt']->current_course) ?> </legend>
 					<table style="width:100%;">
 						<tr>
-							<td><a style="background-color:green;" href="?response=1">i Get It</a></td>
-							<td><a style="background-color:red;  " href="?response=0">i Don't Get It</a></td>
+							<td><input type="submit" name="response" value="1" style="background-color:green;">i Get It</input></td>
+							<td><input type="submit" name="response" value="0" style="background-color:red;">i Don't Get It</input></td>
 						</tr>
 					</table>
 				</fieldset>
