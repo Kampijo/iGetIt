@@ -1,6 +1,5 @@
 <?php
-$_REQUEST['user']=!empty($_REQUEST['user']) ? $_REQUEST['user'] : '';
-
+    $_REQUEST['user']=!empty($_REQUEST['user']) ? $_REQUEST['user'] : '';
 ?>
 
 <!DOCTYPE html>
