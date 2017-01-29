@@ -43,11 +43,12 @@
                     $_SESSION['state']='student_join';
                     $view="student_joinclass.php";
                 }
-                $newuser=false;
                 $_SESSION['iGetIt']->extractInfo($row);
-                // if does not exist, then go to profile
+
+			    // Otherwise, invalid login
 			} else {
-					$errors[]='invalid login';
+                $errors[]='invalid login';
+                break;
 			}
 			break;
 
