@@ -1,6 +1,7 @@
 <?php
     if(isset($_GET['logout'])){
         session_destroy();
+        unset($_GET['logout']);
         header("Refresh:0");
     }
     if(isset($_GET['profile'])){
