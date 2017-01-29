@@ -2,16 +2,16 @@
 require_once "validation.php";
 class iGetIt {
 
-    public $user="", $firstName="", $lastName="", $email="", $current_course="";
+    public $user="", $firstName="", $lastName="", $email="", $current_course="", $type="";
     public $newuser=true;
 
 	public function __construct() {
 
     }
-    public function setInfo($user, $firstName, $lastName, $email){
+    public function setInfo($user, $fName, $lName, $email){
         $this->user=$user;
-        $this->firstName=$firstName;
-        $this->lastName=$lastName;
+        $this->firstName=$fName;
+        $this->lastName=$lName;
         $this->email=$email;
         $this->newuser=false;
     }
@@ -23,6 +23,7 @@ class iGetIt {
         $this->firstName=$row['fname'];
         $this->lastName=$row['lname'];
         $this->email=$row['email'];
+        $this->type=$row['type'];
         $this->newuser=false;
     }
 	public function checkLogin($dbconn, $user, $password){
@@ -46,8 +47,22 @@ class iGetIt {
         $lName=sanitizeInput($lName);
         $email=sanitizeInput($email);
 
-        $result = pg_prepare($dbconn, "insertUser", "INSERT INTO appuser values($1,$2,$3,$4,$5,$6)");
-        $result = pg_execute($dbconn, "insertUser", array($user, $password, $fName, $lName, $email, $type));
+        pg_prepare($dbconn, "insertUser", "INSERT INTO appuser values($1,$2,$3,$4,$5,$6)");
+        pg_execute($dbconn, "insertUser", array($user, $password, $fName, $lName, $email, $type));
+    }
+    public function updateProfile($dbconn, $password, $fName, $lName, $email){
+        $password=sanitizeInput($password);
+        $fName=sanitizeInput($fName);
+        $lName=sanitizeInput($lName);
+        $email=sanitizeInput($email);
+
+        $this->firstName=$fName;
+        $this->lastName=$lName;
+        $this->email=$email;
+
+        pg_prepare($dbconn, "updateProfile", "UPDATE appuser SET password=$1, fname=$2, lname=$3, email=$4 WHERE username = $5");
+        pg_execute($dbconn, "updateProfile", array($password, $fName, $lName, $email, $this->user));
+
     }
     public function getAvailableClasses($dbconn){
         $result = pg_prepare($dbconn, "getClasses", "SELECT * FROM classes");
@@ -55,8 +70,8 @@ class iGetIt {
         return $result;
     }
     public function createClass($dbconn, $name, $instructor, $code){
-        $result = pg_prepare($dbconn, "insertClass", "INSERT INTO classes values($1,$2,$3,$4,$5)");
-        $result = pg_execute($dbconn, "insertClass", array($name,$instructor,$code,0,0));
+        pg_prepare($dbconn, "insertClass", "INSERT INTO classes values($1,$2,$3,$4,$5)");
+        pg_execute($dbconn, "insertClass", array($name,$instructor,$code,0,0));
         $this->current_course=$name . " " . $instructor;
     }
     public function checkClass($dbconn, $name, $code){
@@ -68,11 +83,11 @@ class iGetIt {
     }
     public function studentResponse($dbconn,$response){
         if($response=="I Get It"){
-            $result = pg_prepare($dbconn, "theyGetIt", "UPDATE classes SET igetit=igetit+1 WHERE CONCAT(name, ' ', instructor) = $1");
-            $result = pg_execute($dbconn, "theyGetIt", array($this->current_course));
+            pg_prepare($dbconn, "theyGetIt", "UPDATE classes SET igetit=igetit+1 WHERE CONCAT(name, ' ', instructor) = $1");
+            pg_execute($dbconn, "theyGetIt", array($this->current_course));
         } else {
-            $result = pg_prepare($dbconn, "theyDontGetIt", "UPDATE classes SET idontgetit=idontgetit+1 WHERE CONCAT(name, ' ', instructor) = $1");
-            $result = pg_execute($dbconn, "theyDontGetIt", array($this->current_course));
+            pg_prepare($dbconn, "theyDontGetIt", "UPDATE classes SET idontgetit=idontgetit+1 WHERE CONCAT(name, ' ', instructor) = $1");
+            pg_execute($dbconn, "theyDontGetIt", array($this->current_course));
         }
     }
     public function getPositivePercent($dbconn){

@@ -29,13 +29,17 @@
             <p> <input type="submit" name="submit" value="login" />
                 <?php echo(view_errors($errors)); ?>
         </fieldset>
-    </form>
-    <form method="post">
-        <input type="submit" name="submit" value="New Member" />
-    </form>
-</main>
-<footer>
-</footer>
-</body>
-</html>
+        <a href="?profile">New Member</a>
+        <!--
+     </form>
+     <a href="?profile">New Member</a>
+     <form method="post">
+         <input type="submit" name="submit" value="New Member" />
+     </form>
+     -->
+ </main>
+ <footer>
+ </footer>
+ </body>
+ </html>
 

@@ -1,5 +1,20 @@
 <?php
-    $_REQUEST['user']=!empty($_REQUEST['user']) ? $_REQUEST['user'] : '';
+    if(isset($_GET['logout'])){
+        unset($_SESSION);
+    } else {
+        if ($_SESSION['iGetIt']->newuser == true) {
+            $user = '';
+            $fName = '';
+            $lName = '';
+            $email = '';
+        } else {
+            $user = $_SESSION['iGetIt']->user;
+            $fName = $_SESSION['iGetIt']->fName;
+            $lName = $_SESSION['iGetIt']->lName;
+            $email = $_SESSION['iGetIt']->email;
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +30,7 @@
 			<ul>
                         <li> <a href="">Class</a>
                         <li> <a href="">Profile</a>
-                        <li> <a href="">Logout</a>
+                        <li> <a href="?logout">Logout</a>
                         </ul>
 
 		</nav>
@@ -24,11 +39,11 @@
 			<form method=post novalidate>
 				<fieldset>
 					<legend>Edit Profile</legend>
-					<p> <label for="user">User</label>    <input type="text" name="user" value="<?php echo($_REQUEST['user']); ?>"> </p>
+					<p> <label for="user">User</label>    <input type="text" name="user" value="<?php echo($user); ?>"> </p>
 					<p> <label for="password">Password</label><input type="password" name="password"> </p>
-					<p> <label for="firstName">First Name</label><input type="text" name="firstName"> </p>
-					<p> <label for="lastName">Last Name</label><input type="text" name="lastName"> </p>
-					<p> <label for="email">email</label><input type="text" name="email"> </p>
+					<p> <label for="firstName">First Name</label><input type="text" name="firstName" value="<?php echo($fName); ?>"> </p>
+					<p> <label for="lastName">Last Name</label><input type="text" name="lastName" value="<?php echo($lName); ?>"> </p>
+					<p> <label for="email">email</label><input type="text" name="email" value="<?php echo($email); ?>"> </p>
 					<p> <label for="type">type</label>
 						<input type="radio" name="type" value="instructor" checked>instructor</input>
 						<input type="radio" name="type" value="student">student</input>

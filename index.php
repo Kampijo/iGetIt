@@ -36,7 +36,7 @@
                 }
 
                 if(!empty($errors))break;
-                
+
                 // checks user login, and if exists, then go to landing page
                 if ($row = $_SESSION['iGetIt']->checkLogin($dbconn, $_REQUEST['user'], $_REQUEST['password'])) {
                     if ($row['type'] == "instructor") {
@@ -66,38 +66,55 @@
               if(empty($_REQUEST['submit']) || $_REQUEST['submit']!="Submit") {
                   break;
               }
-              // validate and set errors
-              if(empty($_REQUEST['user'])) {
-                  $errors[] = 'password is required';
-              } if(empty($_REQUEST['password'])){
-                  $errors[]='password is required';
-              } if(empty($_REQUEST['firstName'])){
-                  $errors[]='first name is required';
-              } if (empty($_REQUEST['lastName'])){
-                  $errors[]='last name is required';
-              } if($row = $_SESSION['iGetIt']->checkUser($dbconn,$_REQUEST['user'])){
-                  $errors[]='user already exists';
+              if($_SESSION['iGetIt']->newuser==true) {
+                  // validate and set errors
+                  if (empty($_REQUEST['user'])) {
+                      $errors[] = 'user is required';
+                  }
+                  if (empty($_REQUEST['password'])) {
+                      $errors[] = 'password is required';
+                  }
+                  if ($row = $_SESSION['iGetIt']->checkUser($dbconn, $_REQUEST['user'])) {
+                      $errors[] = 'user already exists';
+                  }
+
+                  // validate user input
+                  $validation = validateNewProfile($_REQUEST['user'], $_REQUEST['password'], $_REQUEST['firstName'],
+                      $_REQUEST['lastName'], $_REQUEST['email']);
+                  $errors = array_merge($errors, $validation);
+
+                  if (!empty($errors)) break;
+
+                  // create the user and move to selected landing page (i.e. instructor or student)
+                  $_SESSION['iGetIt']->createUser($dbconn, $_REQUEST['user'], $_REQUEST['password'], $_REQUEST['firstName'],
+                      $_REQUEST['lastName'], $_REQUEST['email'], $_REQUEST['type']);
+                  if ($_REQUEST['type'] == "instructor") {
+                      $_SESSION['state'] = 'instructor_create';
+                      $view = "instructor_createclass.php";
+                  } else {
+                      $_SESSION['state'] = 'student_join';
+                      $view = "student_joinclass.php";
+                  }
+                  $_SESSION['iGetIt']->setInfo($_REQUEST['user'], $_REQUEST['firstName'],
+                      $_REQUEST['lastName'], $_REQUEST['email']);
+              } else {
+                  if (empty($_REQUEST['password'])) {
+                      $errors[] = 'password is required';
+                  }
+                  $validation=validateNewForm($_REQUEST['password']);
+                  $errors = array_merge($errors, $validation);
+                  if (!empty($errors)) break;
+
+                  $_SESSION['iGetIt']->updateProfile($dbconn,$_REQUEST['password'],$_REQUEST['firstName'],
+                      $_REQUEST['lastName'], $_REQUEST['email']);
+                  if ($_SESSION['iGetIt']->type == "instructor") {
+                      $_SESSION['state'] = 'instructor_create';
+                      $view = "instructor_createclass.php";
+                  } else {
+                      $_SESSION['state'] = 'student_join';
+                      $view = "student_joinclass.php";
+                  }
               }
-
-              // validate user input
-              $validation=validateForm($_REQUEST['user'],$_REQUEST['password'],$_REQUEST['firstName'],
-                  $_REQUEST['lastName'],$_REQUEST['email']);
-              $errors=array_merge($errors,$validation);
-
-            if(!empty($errors))break;
-
-            // create the user and move to selected landing page (i.e. instructor or student)
-            $_SESSION['iGetIt']->createUser($dbconn,$_REQUEST['user'],$_REQUEST['password'],$_REQUEST['firstName'],
-                    $_REQUEST['lastName'],$_REQUEST['email'],$_REQUEST['type']);
-            if($_REQUEST['type']=="instructor"){
-                $_SESSION['state']='instructor_create';
-                $view="instructor_createclass.php";
-            }else{
-                $_SESSION['state']='student_join';
-                $view="student_joinclass.php";
-            }
-            $_SESSION['iGetIt']->setInfo($_REQUEST['user'],$_REQUEST['firstName'],
-                $_REQUEST['lastName'],$_REQUEST['email']);
 
 			break;
 

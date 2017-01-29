@@ -26,7 +26,7 @@
   			<ul>
                         <li> <a href="">Class</a>
                         <li> <a href="">Profile</a>
-                        <li> <a href="">Logout</a>
+                        <li> <a href="?logout">Logout</a>
                         </ul>
 		</nav>
 		<main>
