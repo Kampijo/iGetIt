@@ -64,7 +64,7 @@ class iGetIt {
         $result = pg_execute($dbconn, "checkClass", array($name,$code));
         $row = pg_fetch_array($result);
         $this->current_course=$row['name'] . " " . $row['instructor'];
-        return pg_fetch_array($row);
+        return $row;
     }
     public function studentResponse($dbconn,$response){
         if($response){
