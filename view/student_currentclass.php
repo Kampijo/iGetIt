@@ -4,7 +4,8 @@
         $_SESSION['iGetIt']->studentResponse($dbconn,$_POST['response']);
     }
     if(isset($_GET['logout'])){
-        unset($_SESSION);
+        session_destroy();
+        header("Refresh:0");
     }
     if(isset($_GET['profile'])){
         $_SESSION['state'] = 'profile';
