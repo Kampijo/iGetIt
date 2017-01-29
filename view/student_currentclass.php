@@ -1,7 +1,7 @@
 <?php
     $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
     if(isset($_POST['response'])){
-        $_SESSION['iGetIt']->studentResponse($dbconn,$_GET['response']);
+        $_SESSION['iGetIt']->studentResponse($dbconn,$_POST['response']);
     }
 ?>
 
