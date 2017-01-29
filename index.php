@@ -35,6 +35,7 @@
 			if(!empty($errors))break;
 
 
+			echo ($_REQUEST['submit']);
 			if($_REQUEST['submit']=="Register"){
                 $_SESSION['state'] = 'profile';
                 $view = "profile.php";
