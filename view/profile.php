@@ -11,8 +11,8 @@ if (isset($_GET['logout'])) {
         $email = '';
     } else {
         $user = $_SESSION['iGetIt']->user;
-        $fName = $_SESSION['iGetIt']->fName;
-        $lName = $_SESSION['iGetIt']->lName;
+        $fName = $_SESSION['iGetIt']->firstName;
+        $lName = $_SESSION['iGetIt']->lastName;
         $email = $_SESSION['iGetIt']->email;
     }
 }
