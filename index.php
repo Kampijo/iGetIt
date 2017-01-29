@@ -142,12 +142,6 @@ switch ($_SESSION['state']) {
             break;
         }
 
-        if (empty($_REQUEST['code'])) {
-            $errors[] = 'code required';
-        }
-
-        if (!empty($errors)) break;
-
         if ($_REQUEST['submit'] == "Class") {
         }
         if ($_REQUEST['submit'] == "Profile") {
@@ -162,8 +156,12 @@ switch ($_SESSION['state']) {
         if ($_REQUEST['submit'] == "create") {
             if (empty($_REQUEST['class'])) {
                 $errors[] = 'class name required';
-                break;
             }
+            if (empty($_REQUEST['code'])) {
+                $errors[] = 'code required';
+            }
+            if (!empty($errors)) break;
+
             $instructor = $_SESSION['firstName'] . " " . $_SESSION['lastName'];
             $_SESSION['iGetIt']->createClass($dbconn, $_REQUEST['class'], $instructor, $_REQUEST['code']);
             $_SESSION['state'] = 'instructor_current';
@@ -171,6 +169,9 @@ switch ($_SESSION['state']) {
 
             // if submission is a check class request
         } else {
+            if (empty($_REQUEST['code'])) {
+                $errors[] = 'code required';
+            }
             if ($row = $_SESSION['iGetIt']->checkClass($dbconn, $_REQUEST['courses'], $_REQUEST['code'])) {
                 $_SESSION['state'] = 'instructor_current';
                 $view = "instructor_currentclass.php";
@@ -192,10 +193,6 @@ switch ($_SESSION['state']) {
             break;
         }
 
-        if (empty($_REQUEST['code'])) {
-            $errors[] = 'code required';
-        }
-
         if (!empty($errors)) break;
 
         if ($_REQUEST['submit'] == "Class") {
@@ -208,6 +205,9 @@ switch ($_SESSION['state']) {
             session_destroy();
             header("Refresh:0");
         } else {
+            if (empty($_REQUEST['code'])) {
+                $errors[] = 'code required';
+            }
             if ($row = $_SESSION['iGetIt']->checkClass($dbconn, $_REQUEST['courses'], $_REQUEST['code'])) {
                 $_SESSION['state'] = 'student_current';
                 $view = "student_currentclass.php";
