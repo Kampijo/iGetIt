@@ -1,9 +1,3 @@
-<?php
-    if(isset($_GET['newuser'])){
-        $_SESSION['state'] = 'profile';
-        $view = "profile.php";
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -34,6 +34,10 @@
 			}
 			if(!empty($errors))break;
 
+            if(isset($_REQUEST['newuser'])){
+                $_SESSION['state'] = 'profile';
+                $view = "profile.php";
+            }
 			// checks user login, and if exists, then go to landing page
 			if($row = $_SESSION['iGetIt']->checkLogin($dbconn,$_REQUEST['user'], $_REQUEST['password'])){
 			    if($row['type']=="instructor"){
@@ -48,7 +52,6 @@
 			    // Otherwise, invalid login
 			} else {
                 $errors[]='invalid login';
-                break;
 			}
 			break;
 
