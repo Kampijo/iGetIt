@@ -1,4 +1,12 @@
 <?php
+    if(isset($_GET['logout'])){
+        unset($_SESSION);
+    }
+    if(isset($_GET['profile'])){
+        $_SESSION['state'] = 'profile';
+        $view = "profile.php";
+        header("Refresh:0");
+    }
     $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
     $positive=$_SESSION['iGetIt']->getPositivePercent($dbconn)*100;
     $negative=$_SESSION['iGetIt']->getNegativePercent($dbconn)*100;
@@ -25,7 +33,7 @@
 		<nav>
   			<ul>
                         <li> <a href="">Class</a>
-                        <li> <a href="">Profile</a>
+                        <li> <a href="?profile">Profile</a>
                         <li> <a href="?logout">Logout</a>
                         </ul>
 		</nav>

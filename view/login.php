@@ -1,5 +1,6 @@
 <?php
     $_REQUEST['user']=!empty($_REQUEST['user']) ? $_REQUEST['user'] : '';
+
     if(isset($_GET['profile'])){
         $_SESSION['state'] = 'profile';
         $view = "profile.php";

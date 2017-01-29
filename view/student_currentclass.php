@@ -3,6 +3,14 @@
     if(isset($_POST['response'])){
         $_SESSION['iGetIt']->studentResponse($dbconn,$_POST['response']);
     }
+    if(isset($_GET['logout'])){
+        unset($_SESSION);
+    }
+    if(isset($_GET['profile'])){
+        $_SESSION['state'] = 'profile';
+        $view = "profile.php";
+        header("Refresh:0");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +36,7 @@
 		<nav>
 			<ul>
                         <li> <a href="">Class</a>
-                        <li> <a href="">Profile</a>
+                        <li> <a href="?profile">Profile</a>
                         <li> <a href="?logout">Logout</a>
                         </ul>
 		</nav>
