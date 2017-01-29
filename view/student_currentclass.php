@@ -1,5 +1,8 @@
 <?php
-$dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
+    $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
+    if(isset($_GET['response'])){
+        $_SESSION['iGetIt']->studentResponse($dbconn,$_GET['response']);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -36,8 +39,8 @@ $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopezn
 					<legend> <?php echo($_SESSION['iGetIt']->current_course) ?> </legend>
 					<table style="width:100%;">
 						<tr>
-							<td><a style="background-color:green;" href="<?php $_SESSION['iGetIt']->studentResponse($dbconn,1)?>">i Get It</a></td>
-							<td><a style="background-color:red;  " href="<?php $_SESSION['iGetIt']->studentResponse($dbconn,0)?>">i Don't Get It</a></td>
+							<td><a style="background-color:green;" href="?response=1">i Get It</a></td>
+							<td><a style="background-color:red;  " href="?response=0">i Don't Get It</a></td>
 						</tr>
 					</table>
 				</fieldset>
