@@ -34,10 +34,6 @@
 			}
 			if(!empty($errors))break;
 
-            if(isset($_REQUEST['newuser'])){
-                $_SESSION['state'] = 'profile';
-                $view = "profile.php";
-            }
 			// checks user login, and if exists, then go to landing page
 			if($row = $_SESSION['iGetIt']->checkLogin($dbconn,$_REQUEST['user'], $_REQUEST['password'])){
 			    if($row['type']=="instructor"){
@@ -49,9 +45,14 @@
                 }
                 $_SESSION['iGetIt']->extractInfo($row);
 
-			    // Otherwise, invalid login
+			    // Otherwise, invalid login or clicked link
 			} else {
-                $errors[]='invalid login';
+                if(isset($_GET['newuser'])){
+                    $_SESSION['state'] = 'profile';
+                    $view = "profile.php";
+                } else {
+                    $errors[] = 'invalid login';
+                }
 			}
 			break;
 

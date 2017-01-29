@@ -27,7 +27,7 @@
                 <?php echo(view_errors($errors)); ?>
         </fieldset>
     </form>
-    <a href="index.php?newuser">New Member</a>
+    <a href="?newuser">New Member</a>
 </main>
 <footer>
 </footer>
