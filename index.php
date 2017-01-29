@@ -47,12 +47,7 @@
                 $_SESSION['iGetIt']->extractInfo($row);
                 // if does not exist, then go to profile
 			} else {
-				if($row = $_SESSION['iGetIt']->checkUser($dbconn,$_REQUEST['user'])){
 					$errors[]='invalid login';
-				} else {
-                    $_SESSION['state'] = 'profile';
-                    $view = "profile.php";
-                }
 			}
 			break;
 

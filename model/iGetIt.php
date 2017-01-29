@@ -83,7 +83,23 @@ class iGetIt {
         $positive=$row['igetit'];
         $negative=$row['idontgetit'];
 
+        if($positive+$negative==0){
+            return 0;
+        }
         return $positive/($positive+$negative);
+    }
+    public function getNegativePercent($dbconn){
+        $result = pg_prepare($dbconn, "negativeResponse", "SELECT * from classes WHERE CONCAT(name, ' ', instructor) = $1");
+        $result = pg_execute($dbconn, "negativeResponse", array($this->current_course));
+
+        $row=pg_fetch_array($result);
+        $positive=$row['igetit'];
+        $negative=$row['idontgetit'];
+
+        if($positive+$negative==0){
+            return 0;
+        }
+        return $negative/($positive+$negative);
     }
 }
 ?>

@@ -1,7 +1,8 @@
 <?php
-// So I don't have to deal with unset $_REQUEST['user'] when refilling the form
-$_REQUEST['user']=!empty($_REQUEST['user']) ? $_REQUEST['user'] : '';
-$_REQUEST['password']=!empty($_REQUEST['password']) ? $_REQUEST['password'] : '';
+    if(isset($_GET['newuser'])){
+        $_SESSION['state'] = 'profile';
+        $view = "profile.php";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,13 +27,13 @@ $_REQUEST['password']=!empty($_REQUEST['password']) ? $_REQUEST['password'] : ''
     <form method="post" novalidate>
         <fieldset>
             <legend>Login</legend>
-            <p> <label for="user">User</label>    <input type="text" name="user" value="<?php echo($_REQUEST['user']); ?>" </p>
+            <p> <label for="user">User</label>    <input type="text" name="user"> </p>
             <p> <label for="password">Password</label><input type="password" name="password"> </p>
             <p> <input type="submit" name="submit" value="login" />
                 <?php echo(view_errors($errors)); ?>
         </fieldset>
     </form>
-    <a href=>New Member</a>
+    <a href="?newuser">New Member</a>
 </main>
 <footer>
 </footer>

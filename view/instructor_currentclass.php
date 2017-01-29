@@ -1,7 +1,7 @@
 <?php
     $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
     $positive=$_SESSION['iGetIt']->getPositivePercent($dbconn)*100;
-    $negative=100-$positive;
+    $negative=$_SESSION['iGetIt']->getNegativePercent($dbconn)*100;
 ?>
 <!DOCTYPE html>
 <html lang="en">
