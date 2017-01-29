@@ -35,7 +35,10 @@
 			if(!empty($errors))break;
 
 
-			if($_REQUEST['submit']=="login") {
+			if($_REQUEST['submit']=="Register"){
+                $_SESSION['state'] = 'profile';
+                $view = "profile.php";
+            } else {
                 // checks user login, and if exists, then go to landing page
                 if ($row = $_SESSION['iGetIt']->checkLogin($dbconn, $_REQUEST['user'], $_REQUEST['password'])) {
                     if ($row['type'] == "instructor") {
@@ -46,14 +49,10 @@
                         $view = "student_joinclass.php";
                     }
                     $_SESSION['iGetIt']->extractInfo($row);
-
                     // Otherwise, invalid login
                 } else {
                     $errors[] = 'invalid login';
                 }
-            } else {
-                $_SESSION['state'] = 'profile';
-                $view = "profile.php";
             }
 			break;
 
