@@ -22,7 +22,7 @@
 			$view="login.php";
 
 			// check if submit or not
-			if(empty($_REQUEST['submit']) || ($_REQUEST['submit']!="login" && $_REQUEST['submit']!="New Member")){
+			if(empty($_REQUEST['submit']) || ($_REQUEST['submit']!="login" && $_REQUEST['submit']!="Register")){
 				break;
 			}
 			// validate and set errors
@@ -33,6 +33,7 @@
 				$errors[]='password is required';
 			}
 			if(!empty($errors))break;
+
 
 			if($_REQUEST['submit']=="login") {
                 // checks user login, and if exists, then go to landing page

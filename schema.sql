@@ -4,7 +4,8 @@ create table appuser (
 	fname varchar(127),
 	lname varchar(127),
 	email varchar(255), 
-	type varchar(20));
+	type varchar(20)
+	lastclick lon);
 
 create table classes (
 	name varchar(127),
