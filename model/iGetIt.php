@@ -75,5 +75,15 @@ class iGetIt {
             $result = pg_execute($dbconn, "theyDontGetIt", array($this->current_course));
         }
     }
+    public function getPositivePercent($dbconn){
+        $result = pg_prepare($dbconn, "positiveResponse", "SELECT * from classes WHERE CONCAT(name, ' ', instructor) = $1");
+        $result = pg_execute($dbconn, "positiveResponse", array($this->current_course));
+
+        $row=pg_fetch_array($result);
+        $positive=$row['igetit'];
+        $negative=$row['idontgetit'];
+
+        return $positive/($positive+$negative);
+    }
 }
 ?>

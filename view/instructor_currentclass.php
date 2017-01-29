@@ -1,3 +1,8 @@
+<?php
+    $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
+    $positive=$_SESSION['iGetIt']->getPositivePercent($dbconn)*100;
+    $negative=100-$positive;
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -29,8 +34,8 @@
 			<form>
 				<fieldset>
 					<legend> <?php echo($_SESSION['iGetIt']->current_course) ?></legend>
-					<span style="background-color:green; width:50%;">i Get It</span>
-					<span style="background-color:red;  width:50%;">i Don't Get It</span>
+					<span style="background-color:green; width:<?php echo($positive) ?>%;">i Get It</span>
+					<span style="background-color:red;  width:<?php echo($negative) ?>%;">i Don't Get It</span>
 				</fieldset>
 			</form>
 		</main>
