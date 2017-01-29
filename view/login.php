@@ -1,3 +1,6 @@
+<?php
+    $_REQUEST['user']=!empty($_REQUEST['user']) ? $_REQUEST['user'] : '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +24,7 @@
     <form method="post" novalidate>
         <fieldset>
             <legend>Login</legend>
-            <p> <label for="user">User</label>    <input type="text" name="user"> </p>
+            <p> <label for="user">User</label>    <input type="text" name="user" value="<?php echo($_REQUEST['user']); ?>"> </p>
             <p> <label for="password">Password</label><input type="password" name="password"> </p>
             <p> <input type="submit" name="submit" value="login" />
                 <?php echo(view_errors($errors)); ?>
