@@ -29,12 +29,13 @@
 	<body>
 		<header><h1>iGetIt</h1></header>
 		<nav>
-			<ul>
-                        <li> <a href="">Class</a>
-                        <li> <a href="">Profile</a>
-                        <li> <a href="?logout">Logout</a>
-                        </ul>
-
+            <form method="post">
+                <ul>
+                            <li> <input type="submit" name="submit" value="Class" />
+                            <li> <input type="submit" name="submit" value="Profile" />
+                            <li> <input type="submit" name="submit" value="Logout" />
+                </ul>
+            </form>
 		</nav>
 		<main>
 			<h1>Profile</h1>
