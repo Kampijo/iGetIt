@@ -31,7 +31,7 @@
         </fieldset>
     </form>
     <form method="post">
-        <input type="submit" name="newmember" value="Register">
+        <input type="submit" name="newmember" value="Register" />
     </form>
 </main>
 <footer>
