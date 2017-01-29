@@ -37,7 +37,7 @@ switch ($_SESSION['state']) {
             }
 
             if (!empty($errors)) break;
-            
+
             // checks user login, and if exists, then go to landing page
             if ($row = $_SESSION['iGetIt']->checkLogin($dbconn, $_REQUEST['user'], $_REQUEST['password'])) {
                 if ($row['type'] == "instructor") {
@@ -77,6 +77,7 @@ switch ($_SESSION['state']) {
         }
         if ($_REQUEST['submit'] == "Logout") {
             session_destroy();
+            header("Refresh:0");
         } else {
             if ($_SESSION['iGetIt']->newuser == true) {
                 // validate and set errors
@@ -155,6 +156,7 @@ switch ($_SESSION['state']) {
         }
         if ($_REQUEST['submit'] == "Logout") {
             session_destroy();
+            header("Refresh:0");
         }
         // if submission is a create class request
         if ($_REQUEST['submit'] == "create") {
@@ -204,6 +206,7 @@ switch ($_SESSION['state']) {
         }
         if ($_REQUEST['submit'] == "Logout") {
             session_destroy();
+            header("Refresh:0");
         } else {
             if ($row = $_SESSION['iGetIt']->checkClass($dbconn, $_REQUEST['courses'], $_REQUEST['code'])) {
                 $_SESSION['state'] = 'student_current';
@@ -234,6 +237,7 @@ switch ($_SESSION['state']) {
         }
         if ($_REQUEST['submit'] == "Logout") {
             session_destroy();
+            header("Refresh:0");
         }
 
         break;
@@ -256,6 +260,7 @@ switch ($_SESSION['state']) {
         }
         if ($_REQUEST['submit'] == "Logout") {
             session_destroy();
+            header("Refresh:0");
         }
 
         break;
