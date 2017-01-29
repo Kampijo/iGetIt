@@ -25,17 +25,19 @@ switch ($_SESSION['state']) {
         if (empty($_REQUEST['submit']) || ($_REQUEST['submit'] != "login" && $_REQUEST['submit'] != "New Member")) {
             break;
         }
-        // validate and set errors
-        if (empty($_REQUEST['user'])) {
-            $errors[] = 'user is required';
-        }
-        if (empty($_REQUEST['password'])) {
-            $errors[] = 'password is required';
-        }
-
-        if (!empty($errors)) break;
 
         if($_REQUEST['submit']=="login") {
+
+            // validate and set errors
+            if (empty($_REQUEST['user'])) {
+                $errors[] = 'user is required';
+            }
+            if (empty($_REQUEST['password'])) {
+                $errors[] = 'password is required';
+            }
+
+            if (!empty($errors)) break;
+            
             // checks user login, and if exists, then go to landing page
             if ($row = $_SESSION['iGetIt']->checkLogin($dbconn, $_REQUEST['user'], $_REQUEST['password'])) {
                 if ($row['type'] == "instructor") {
