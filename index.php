@@ -74,6 +74,7 @@ switch ($_SESSION['state']) {
         if ($_REQUEST['submit'] == "Profile") {
             $_SESSION['state'] = 'profile';
             $view = "profile.php";
+            break;
         }
         if ($_REQUEST['submit'] == "Logout") {
             session_destroy();
@@ -147,10 +148,12 @@ switch ($_SESSION['state']) {
         if ($_REQUEST['submit'] == "Profile") {
             $_SESSION['state'] = 'profile';
             $view = "profile.php";
+            break;
         }
         if ($_REQUEST['submit'] == "Logout") {
             session_destroy();
             header("Refresh:0");
+            break;
         }
         // if submission is a create class request
         if ($_REQUEST['submit'] == "create") {
@@ -200,10 +203,12 @@ switch ($_SESSION['state']) {
         if ($_REQUEST['submit'] == "Profile") {
             $_SESSION['state'] = 'profile';
             $view = "profile.php";
+            break;
         }
         if ($_REQUEST['submit'] == "Logout") {
             session_destroy();
             header("Refresh:0");
+            break;
         } else {
             if (empty($_REQUEST['code'])) {
                 $errors[] = 'code required';
@@ -234,10 +239,12 @@ switch ($_SESSION['state']) {
         if ($_REQUEST['submit'] == "Profile") {
             $_SESSION['state'] = 'profile';
             $view = "profile.php";
+            break;
         }
         if ($_REQUEST['submit'] == "Logout") {
             session_destroy();
             header("Refresh:0");
+            break;
         }
 
         break;
@@ -257,10 +264,12 @@ switch ($_SESSION['state']) {
         if ($_REQUEST['submit'] == "Profile") {
             $_SESSION['state'] = 'profile';
             $view = "profile.php";
+            break;
         }
         if ($_REQUEST['submit'] == "Logout") {
             session_destroy();
             header("Refresh:0");
+            break;
         }
 
         break;
