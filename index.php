@@ -22,7 +22,7 @@
 			$view="login.php";
 
 			// check if submit or not
-			if(empty($_REQUEST['submit']) || $_REQUEST['submit']!="login"){
+			if(empty($_REQUEST['submit']) || ($_REQUEST['submit']!="login" && $_REQUEST['submit']!="New Member")){
 				break;
 			}
 			// validate and set errors
@@ -32,22 +32,29 @@
 			if(empty($_REQUEST['password'])){
 				$errors[]='password is required';
 			}
+
 			if(!empty($errors))break;
 
-			// checks user login, and if exists, then go to landing page
-			if($row = $_SESSION['iGetIt']->checkLogin($dbconn,$_REQUEST['user'], $_REQUEST['password'])){
-			    if($row['type']=="instructor"){
-                    $_SESSION['state']='instructor_create';
-                    $view="instructor_createclass.php";
+			if($_REQUEST['submit']=="login") {
+                // checks user login, and if exists, then go to landing page
+                if ($row = $_SESSION['iGetIt']->checkLogin($dbconn, $_REQUEST['user'], $_REQUEST['password'])) {
+                    if ($row['type'] == "instructor") {
+                        $_SESSION['state'] = 'instructor_create';
+                        $view = "instructor_createclass.php";
+                    } else {
+                        $_SESSION['state'] = 'student_join';
+                        $view = "student_joinclass.php";
+                    }
+                    $_SESSION['iGetIt']->extractInfo($row);
+
+                    // Otherwise, invalid login
                 } else {
-                    $_SESSION['state']='student_join';
-                    $view="student_joinclass.php";
+                    $errors[] = 'invalid login';
                 }
-                $_SESSION['iGetIt']->extractInfo($row);
-			    // Otherwise, invalid login
-			} else {
-                $errors[]='invalid login';
-			}
+            } else {
+			    $_SESSION['state'] = 'profile';
+			    $view = "profile.php";
+            }
 			break;
 
 		case "profile":
