@@ -168,17 +168,17 @@ switch ($_SESSION['state']) {
             $view = "instructor_currentclass.php";
 
             // if submission is a check class request
-        } else {
+        } if ($_REQUEST['submit'] == "join") {
             if (empty($_REQUEST['code'])) {
                 $errors[] = 'code required';
             }
+            if (!empty($errors)) break;
             if ($row = $_SESSION['iGetIt']->checkClass($dbconn, $_REQUEST['courses'], $_REQUEST['code'])) {
                 $_SESSION['state'] = 'instructor_current';
                 $view = "instructor_currentclass.php";
             } else {
                 $errors[] = 'incorrect code';
             }
-
         }
 
         break;
