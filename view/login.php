@@ -3,6 +3,7 @@
     if(isset($_GET['profile'])){
         $_SESSION['state'] = 'profile';
         $view = "profile.php";
+        header("Refresh:0");
     }
 ?>
 <!DOCTYPE html>
