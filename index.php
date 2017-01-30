@@ -125,7 +125,8 @@ switch ($_SESSION['state']) {
                 if (empty($_REQUEST['password'])) {
                     $errors[] = 'password is required';
                 }
-                $validation = validateNewProfile($_REQUEST['password']);
+                $validation = validateNewProfile($_SESSION['iGetIt']->password, $_SESSION['iGetIt']->firstName,
+                    $_SESSION['iGetIt']->lastName, $_SESSION['iGetIt']->email);
                 $errors = array_merge($errors, $validation);
                 if (!empty($errors)) break;
 
