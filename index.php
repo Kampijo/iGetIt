@@ -255,8 +255,9 @@ switch ($_SESSION['state']) {
         $view = "student_currentclass.php";
 
         // check if submit or not
-        if (empty($_REQUEST['response']) || (empty($_REQUEST['submit']) || ($_REQUEST['submit'] != "Submit" && $_REQUEST['submit'] != "Class"
-                && $_REQUEST['submit'] != "Profile" && $_REQUEST['submit'] != "Logout"))
+        if (empty($_REQUEST['submit']) || ($_REQUEST['submit'] != "Submit" && $_REQUEST['submit'] != "Class"
+                && $_REQUEST['submit'] != "Profile" && $_REQUEST['submit'] != "Logout" &&
+        $_REQUEST['submit'] != "I Get It" && $_REQUEST['submit'] != "I Don't Get It")
         ) {
             break;
         }

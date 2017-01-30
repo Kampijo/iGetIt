@@ -38,8 +38,8 @@ require_once __DIR__ . '/../dbconn.php';
             <legend> <?php echo($_SESSION['iGetIt']->current_course) ?> </legend>
             <table style="width:100%;">
                 <tr>
-                    <td><input type="submit" name="response" value="I Get It" style="background-color:green;"></td>
-                    <td><input type="submit" name="response" value="I Don't Get It" style="background-color:red;"></td>
+                    <td><input type="submit" name="submit" value="I Get It" style="background-color:green;"></td>
+                    <td><input type="submit" name="submit" value="I Don't Get It" style="background-color:red;"></td>
                 </tr>
             </table>
         </fieldset>
