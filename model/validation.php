@@ -7,11 +7,11 @@
         return $input;
     }
     function validateNewProfile($user, $password, $fName, $lName, $email){
-        $user=$this->sanitizeInput($user);
-        $password=$this->sanitizeInput($password);
-        $fName=$this->sanitizeInput($fName);
-        $lName=$this->sanitizeInput($lName);
-        $email=$this->sanitizeInput($email);
+        $user=sanitizeInput($user);
+        $password=sanitizeInput($password);
+        $fName=sanitizeInput($fName);
+        $lName=sanitizeInput($lName);
+        $email=sanitizeInput($email);
 
         $errors=array();
         if (!preg_match("/^[a-zA-Z0-9 ]*$/", $user)) {
@@ -34,10 +34,10 @@
         return $errors;
     }
     function validateProfile($password, $fName, $lName, $email){
-        $password=$this->sanitizeInput($password);
-        $fName=$this->sanitizeInput($fName);
-        $lName=$this->sanitizeInput($lName);
-        $email=$this->sanitizeInput($email);
+        $password=sanitizeInput($password);
+        $fName=sanitizeInput($fName);
+        $lName=sanitizeInput($lName);
+        $email=sanitizeInput($email);
 
         $errors=array();
         if (!preg_match("/^[a-zA-Z0-9]*$/", $password)) {
