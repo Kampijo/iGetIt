@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__.'/../setup.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +33,6 @@
         <fieldset>
             <legend>Current Classes</legend>
             <?php echo "<select name='courses' form='courses'>";
-            $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
             $result = $_SESSION['iGetIt']->getAvailableClasses($dbconn);
             while ($row = pg_fetch_array($result)) {
                 echo "<option value='" . $row['name'] . "'>"

@@ -1,9 +1,4 @@
 <?php
-if (isset($_GET['logout'])) {
-    session_destroy();
-    unset($_GET['logout']);
-    header("Refresh:0");
-} else {
     if ($_SESSION['iGetIt']->newuser == true) {
         $user = '';
         $fName = '';
@@ -15,7 +10,6 @@ if (isset($_GET['logout'])) {
         $lName = $_SESSION['iGetIt']->lastName;
         $email = $_SESSION['iGetIt']->email;
     }
-}
 
 ?>
 

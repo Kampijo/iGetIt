@@ -1,5 +1,5 @@
 <?php
-$dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
+require_once __DIR__.'/../setup.php';
 if (isset($_POST['response'])) {
     $_SESSION['iGetIt']->studentResponse($dbconn, $_POST['response']);
 }

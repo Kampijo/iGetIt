@@ -1,5 +1,5 @@
 <?php
-$dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
+require_once __DIR__.'/../setup.php';
 $positive = $_SESSION['iGetIt']->getPositivePercent($dbconn) * 100;
 $negative = $_SESSION['iGetIt']->getNegativePercent($dbconn) * 100;
 ?>
