@@ -6,13 +6,16 @@
         $input = htmlspecialchars($input);
         return $input;
     }
-    function validateNewProfile($password, $fName, $lName, $email){
+    function validateNewProfile($user, $password, $fName, $lName, $email){
+        $user=sanitizeInput($user);
         $password=sanitizeInput($password);
         $fName=sanitizeInput($fName);
         $lName=sanitizeInput($lName);
-        $email=sanitizeInput($email);
 
         $errors=array();
+        if (!preg_match("/^[a-zA-Z0-9 ]*$/", $user)) {
+            $errors[]='username can only contain letters and numbers';
+        }
         if (!preg_match("/^[a-zA-Z0-9]*$/", $password)) {
             $errors[]='password can only contain letters and numbers';
         }
@@ -33,7 +36,6 @@
         $password=sanitizeInput($password);
         $fName=sanitizeInput($fName);
         $lName=sanitizeInput($lName);
-        $email=sanitizeInput($email);
 
         $errors=array();
         if (!preg_match("/^[a-zA-Z0-9]*$/", $password)) {
