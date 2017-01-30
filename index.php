@@ -172,7 +172,7 @@ switch ($_SESSION['state']) {
             }
             if (!empty($errors)) break;
 
-            $instructor = $_SESSION['firstName'] . " " . $_SESSION['lastName'];
+            $instructor = $_SESSION['iGetIt']->firstName . " " . $_SESSION['iGetIt']->lastName;
             $_SESSION['iGetIt']->createClass($dbconn, $_REQUEST['class'], $instructor, $_REQUEST['code']);
             $_SESSION['state'] = 'instructor_current';
             $view = "instructor_currentclass.php";
