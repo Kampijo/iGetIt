@@ -84,7 +84,7 @@ class iGetIt {
     }
     public function studentResponse($dbconn,$response){
         // if last click not within last five minutes
-        if(time()-$this->lastclick>=600) {
+        if(time()-$this->lastclick>=120) {
             if ($response == "I Get It") {
                 pg_prepare($dbconn, "theyGetIt", "UPDATE classes SET igetit=igetit+1 WHERE CONCAT(name, ' ', instructor) = $1");
                 pg_execute($dbconn, "theyGetIt", array($this->current_course));
