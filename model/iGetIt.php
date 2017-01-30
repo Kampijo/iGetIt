@@ -7,7 +7,6 @@ class iGetIt {
     public $lastclick=0;
 
 	public function __construct() {
-
     }
     public function setInfo($user, $fName, $lName, $email){
         $this->user=$user;

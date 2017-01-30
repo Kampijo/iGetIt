@@ -34,13 +34,11 @@ $negative = $_SESSION['iGetIt']->getNegativePercent($dbconn) * 100;
 </nav>
 <main>
     <h1>Class</h1>
-    <form>
         <fieldset>
             <legend> <?php echo($_SESSION['iGetIt']->current_course) ?></legend>
             <span style="background-color:green; width:<?php echo($positive) ?>%;"></span>
             <span style="background-color:red;  width:<?php echo($negative) ?>%;"></span>
         </fieldset>
-    </form>
 </main>
 <footer>
 </footer>

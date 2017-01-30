@@ -90,7 +90,7 @@ switch ($_SESSION['state']) {
             session_destroy();
             header("Refresh:0");
         } else {
-            if ($_SESSION['iGetIt']->newuser == true) {
+            if ($_SESSION['iGetIt']->newuser) {
                 // validate and set errors
                 if (empty($_REQUEST['user'])) {
                     $errors[] = 'user is required';
