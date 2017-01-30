@@ -77,7 +77,7 @@ switch ($_SESSION['state']) {
                 $view = "student_joinclass.php";
             } else {
                 $_SESSION['state']="instructor_create";
-                $view="instructor_currentclass.php";
+                $view="instructor_createclass.php";
             }
             break;
         }
