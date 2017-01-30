@@ -13,7 +13,7 @@
         $lName=sanitizeInput($lName);
 
         $errors=array();
-        if (!preg_match("/^[a-zA-Z0-9 ]*$/", $user)) {
+        if (!preg_match("/^[a-zA-Z0-9]*$/", $user)) {
             $errors[]='username can only contain letters and numbers';
         }
         if (!preg_match("/^[a-zA-Z0-9]*$/", $password)) {
@@ -38,8 +38,10 @@
         $lName=sanitizeInput($lName);
 
         $errors=array();
-        if (!preg_match("/^[a-zA-Z0-9]*$/", $password)) {
-            $errors[]='password can only contain letters and numbers';
+        if(!empty($password)) {
+            if (!preg_match("/^[a-zA-Z0-9]*$/", $password)) {
+                $errors[] = 'password can only contain letters and numbers';
+            }
         }
         if (!preg_match("/^[a-zA-Z ]*$/", $fName)) {
             $errors[]='first name can only contain letters';

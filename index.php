@@ -122,9 +122,6 @@ switch ($_SESSION['state']) {
                 $_SESSION['iGetIt']->setInfo($_REQUEST['user'], $_REQUEST['firstName'],
                     $_REQUEST['lastName'], $_REQUEST['email']);
             } else {
-                if (empty($_REQUEST['password'])) {
-                    $errors[] = 'password is required';
-                }
                 $validation = validateProfile($_REQUEST['password'], $_REQUEST['firstName'],
                     $_REQUEST['lastName'], $_REQUEST['email']);
                 $errors = array_merge($errors, $validation);

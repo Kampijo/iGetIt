@@ -60,7 +60,11 @@ class iGetIt {
         $this->lastName=$lName;
         $this->email=$email;
 
-        pg_prepare($dbconn, "updateProfile", "UPDATE appuser SET password=$1, fname=$2, lname=$3, email=$4 WHERE username = $5");
+        if(!empty($password)) {
+            pg_prepare($dbconn, "updateProfile", "UPDATE appuser SET password=$1, fname=$2, lname=$3, email=$4 WHERE username = $5");
+        } else {
+            pg_prepare($dbconn, "updateProfile", "UPDATE appuser SET fname=$2, lname=$3, email=$4 WHERE username = $5");
+        }
         pg_execute($dbconn, "updateProfile", array($password, $fName, $lName, $email, $this->user));
 
     }
