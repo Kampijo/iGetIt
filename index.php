@@ -70,7 +70,7 @@ switch ($_SESSION['state']) {
         ) {
             break;
         }
-        if ($_REQUEST['submit'] == "Class") {
+        if ($_REQUEST['submit'] == "Class" && !$_SESSION['iGetIt']->newuser) {
             $_SESSION['iGetIt']->resetCurrentClass();
             if($_SESSION['iGetIt']->type=="student") {
                 $_SESSION['state'] = "student_join";
@@ -243,7 +243,7 @@ switch ($_SESSION['state']) {
         if ($_REQUEST['submit'] == "Class") {
             $_SESSION['iGetIt']->resetCurrentClass();
             $_SESSION['state']="instructor_create";
-            $view="instructor_currentclass.php";
+            $view="instructor_createclass.php";
             break;
         }
         if ($_REQUEST['submit'] == "Profile") {
