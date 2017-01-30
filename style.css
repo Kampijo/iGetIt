@@ -20,7 +20,7 @@ nav ul {
     padding: 0;
 }
 
-nav ul a {
+nav ul input {
     text-decoration: none;
     display: block;
     padding: 5px;

@@ -106,6 +106,9 @@ class iGetIt {
         if($positive+$negative==0){
             return 0;
         }
+        if($positive/($positive+$negative) >= 1){
+            return 1;
+        }
         return $positive/($positive+$negative);
     }
     public function getNegativePercent($dbconn){
@@ -118,6 +121,9 @@ class iGetIt {
 
         if($positive+$negative==0){
             return 0;
+        }
+        if($negative/($positive+$negative) >= 1){
+            return 1;
         }
         return $negative/($positive+$negative);
     }
