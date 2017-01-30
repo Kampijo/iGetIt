@@ -121,5 +121,8 @@ class iGetIt {
         }
         return $negative/($positive+$negative);
     }
+    public function resetCurrentClass(){
+        $this->current_course="";
+    }
 }
 ?>

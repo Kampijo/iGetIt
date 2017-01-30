@@ -71,6 +71,15 @@ switch ($_SESSION['state']) {
             break;
         }
         if ($_REQUEST['submit'] == "Class") {
+            $_SESSION['iGetIt']->resetCurrentClass();
+            if($_SESSION['iGetIt']->type=="student") {
+                $_SESSION['state'] = "student_join";
+                $view = "student_joinclass.php";
+            } else {
+                $_SESSION['state']="instructor_create";
+                $view="instructor_currentclass.php";
+            }
+            break;
         }
         if ($_REQUEST['submit'] == "Profile") {
             $_SESSION['state'] = 'profile';
@@ -144,8 +153,7 @@ switch ($_SESSION['state']) {
             break;
         }
 
-        if ($_REQUEST['submit'] == "Class") {
-        }
+        if ($_REQUEST['submit'] == "Class") break;
         if ($_REQUEST['submit'] == "Profile") {
             $_SESSION['state'] = 'profile';
             $view = "profile.php";
@@ -199,8 +207,7 @@ switch ($_SESSION['state']) {
 
         if (!empty($errors)) break;
 
-        if ($_REQUEST['submit'] == "Class") {
-        }
+        if ($_REQUEST['submit'] == "Class") break;
         if ($_REQUEST['submit'] == "Profile") {
             $_SESSION['state'] = 'profile';
             $view = "profile.php";
@@ -236,6 +243,10 @@ switch ($_SESSION['state']) {
             break;
         }
         if ($_REQUEST['submit'] == "Class") {
+            $_SESSION['iGetIt']->resetCurrentClass();
+            $_SESSION['state']="instructor_create";
+            $view="instructor_currentclass.php";
+            break;
         }
         if ($_REQUEST['submit'] == "Profile") {
             $_SESSION['state'] = 'profile';
@@ -262,6 +273,10 @@ switch ($_SESSION['state']) {
             break;
         }
         if ($_REQUEST['submit'] == "Class") {
+            $_SESSION['iGetIt']->resetCurrentClass();
+            $_SESSION['state']="student_join";
+            $view="student_joinclass.php";
+            break;
         }
         if ($_REQUEST['submit'] == "Profile") {
             $_SESSION['state'] = 'profile';
