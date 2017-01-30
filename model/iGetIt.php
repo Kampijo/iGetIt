@@ -62,10 +62,12 @@ class iGetIt {
 
         if(!empty($password)) {
             pg_prepare($dbconn, "updateProfile", "UPDATE appuser SET password=$1, fname=$2, lname=$3, email=$4 WHERE username = $5");
+            pg_execute($dbconn, "updateProfile", array($password, $fName, $lName, $email, $this->user));
         } else {
             pg_prepare($dbconn, "updateProfile", "UPDATE appuser SET fname=$1, lname=$2, email=$3 WHERE username = $4");
+            pg_execute($dbconn, "updateProfile", array($fName, $lName, $email, $this->user));
         }
-        pg_execute($dbconn, "updateProfile", array($password, $fName, $lName, $email, $this->user));
+
 
     }
     public function getAvailableClasses($dbconn){
