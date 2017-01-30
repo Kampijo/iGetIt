@@ -70,17 +70,19 @@ switch ($_SESSION['state']) {
         ) {
             break;
         }
-        if ($_REQUEST['submit'] == "Class" && !$_SESSION['iGetIt']->newuser) {
-            $_SESSION['iGetIt']->resetCurrentClass();
-            if($_SESSION['iGetIt']->type=="student") {
-                $_SESSION['state'] = "student_join";
-                $view = "student_joinclass.php";
-            } else {
-                $_SESSION['state']="instructor_create";
-                $view="instructor_createclass.php";
+        if ($_REQUEST['submit'] == "Class") {
+            if (!$_SESSION['iGetIt']->newuser) {
+                $_SESSION['iGetIt']->resetCurrentClass();
+                if ($_SESSION['iGetIt']->type == "student") {
+                    $_SESSION['state'] = "student_join";
+                    $view = "student_joinclass.php";
+                } else {
+                    $_SESSION['state'] = "instructor_create";
+                    $view = "instructor_createclass.php";
+                }
+                break;
             }
-            break;
-        }
+        } else break;
         if ($_REQUEST['submit'] == "Profile") {
             $_SESSION['state'] = 'profile';
             $view = "profile.php";
