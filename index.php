@@ -80,9 +80,7 @@ switch ($_SESSION['state']) {
                     $_SESSION['state'] = "instructor_create";
                     $view = "instructor_createclass.php";
                 }
-                break;
             }
-        } else {
             break;
         }
         if ($_REQUEST['submit'] == "Profile") {
