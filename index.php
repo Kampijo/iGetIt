@@ -2,11 +2,12 @@
 
 require_once "model/iGetIt.php";
 require_once "model/validation.php";
+require_once "setup.php";
+
 session_save_path("sess");
 session_start();
 ini_set('display_errors', 'On');
 
-$dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=lopeznyg_309 user=lopeznyg password=13779");
 $errors = array();
 $view = "";
 
