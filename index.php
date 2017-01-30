@@ -82,7 +82,9 @@ switch ($_SESSION['state']) {
                 }
                 break;
             }
-        } else break;
+        } else {
+            break;
+        }
         if ($_REQUEST['submit'] == "Profile") {
             $_SESSION['state'] = 'profile';
             $view = "profile.php";
