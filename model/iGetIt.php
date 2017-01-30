@@ -92,8 +92,8 @@ class iGetIt {
                 pg_prepare($dbconn, "theyDontGetIt", "UPDATE classes SET idontgetit=idontgetit+1 WHERE CONCAT(name, ' ', instructor) = $1");
                 pg_execute($dbconn, "theyDontGetIt", array($this->current_course));
             }
+            $this->lastclick=time();
         }
-        $this->lastclick=time();
     }
     public function getPositivePercent($dbconn){
         $result = pg_prepare($dbconn, "positiveResponse", "SELECT * from classes WHERE CONCAT(name, ' ', instructor) = $1");
