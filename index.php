@@ -273,8 +273,8 @@ switch ($_SESSION['state']) {
             header("Refresh:0");
             break;
         }
-        if (isset($_REQUEST['response'])) {
-            $_SESSION['iGetIt']->studentResponse($dbconn, $_REQUEST['response']);
+        else {
+            $_SESSION['iGetIt']->studentResponse($dbconn, $_REQUEST['submit']);
         }
 
         break;
