@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/../setup.php';
+require_once __DIR__ . '/../dbconn.php';
 $positive = $_SESSION['iGetIt']->getPositivePercent($dbconn) * 100;
 $negative = $_SESSION['iGetIt']->getNegativePercent($dbconn) * 100;
 ?>
@@ -8,6 +8,7 @@ $negative = $_SESSION['iGetIt']->getNegativePercent($dbconn) * 100;
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css"/>
+    <meta http-equiv="refresh" content="30">
     <style>
         span {
             background-color: green;

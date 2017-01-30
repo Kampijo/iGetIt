@@ -1,8 +1,5 @@
 <?php
-require_once __DIR__.'/../setup.php';
-if (isset($_POST['response'])) {
-    $_SESSION['iGetIt']->studentResponse($dbconn, $_POST['response']);
-}
+require_once __DIR__ . '/../dbconn.php';
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +33,7 @@ if (isset($_POST['response'])) {
 </nav>
 <main>
     <h1>Class</h1>
-    <form method="post" action="">
+    <form method="post">
         <fieldset>
             <legend> <?php echo($_SESSION['iGetIt']->current_course) ?> </legend>
             <table style="width:100%;">

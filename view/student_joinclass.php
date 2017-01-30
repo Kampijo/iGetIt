@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/../setup.php';
+require_once __DIR__ . '/../dbconn.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

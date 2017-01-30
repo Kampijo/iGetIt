@@ -2,7 +2,7 @@
 
 require_once "model/iGetIt.php";
 require_once "model/validation.php";
-require_once "setup.php";
+require_once "dbconn.php";
 
 session_save_path("sess");
 session_start();
@@ -271,6 +271,9 @@ switch ($_SESSION['state']) {
             session_destroy();
             header("Refresh:0");
             break;
+        }
+        if (isset($_REQUEST['response'])) {
+            $_SESSION['iGetIt']->studentResponse($dbconn, $_REQUEST['response']);
         }
 
         break;
