@@ -1,6 +1,8 @@
 Features:
 
-1) Input sanitization (clears special characters that might be interpreted as code)
+1) Input sanitization (clears special characters that might be interpreted as code) (Look at model/validation.php)
 2) Green and red bars in instructor current class page dynamically scales with the votes
-3) 
+3) Reset button in instructor current class page to reset votes back to 0
+4) Profile repopulation for existing users
+5) Leaving password field blank results in password remaining the same
 
