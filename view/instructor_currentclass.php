@@ -35,8 +35,8 @@ $negative = $_SESSION['iGetIt']->getNegativePercent($dbconn) * 100;
     <h1>Class</h1>
         <fieldset>
             <legend> <?php echo($_SESSION['iGetIt']->current_course) ?></legend>
-            I Get It<span style="background-color:green; width:<?php echo($positive) ?>%;"></span>
-            I Don't Get It<span style="background-color:red;  width:<?php echo($negative) ?>%;"></span>
+            I Get It (<?php echo($positive) ?>%)<span style="background-color:green; width:<?php echo($positive) ?>%;"></span>
+            I Don't Get It (<?php echo($negative) ?>%)<span style="background-color:red;  width:<?php echo($negative) ?>%;"></span>
         </fieldset>
 <form method="post">
     <input type="submit" name="submit" value="Reset"/>
