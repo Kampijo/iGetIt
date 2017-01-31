@@ -1,6 +1,6 @@
 Features:
 
-1) 
-2) 
+1) Input sanitization (clears special characters that might be interpreted as code)
+2) Green and red bars in instructor current class page dynamically scales with the votes
 3) 
-...
+

@@ -38,6 +38,9 @@ $negative = $_SESSION['iGetIt']->getNegativePercent($dbconn) * 100;
             I Get It<span style="background-color:green; width:<?php echo($positive) ?>%;"></span>
             I Don't Get It<span style="background-color:red;  width:<?php echo($negative) ?>%;"></span>
         </fieldset>
+<form method="post">
+    <input type="submit" name="submit" value="Reset"/>
+</form>
 <footer>
 </footer>
 </body>

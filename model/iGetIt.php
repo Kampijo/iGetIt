@@ -68,7 +68,6 @@ class iGetIt {
             pg_execute($dbconn, "updateProfile", array($fName, $lName, $email, $this->user));
         }
 
-
     }
     public function getAvailableClasses($dbconn){
         $result = pg_prepare($dbconn, "getClasses", "SELECT * FROM classes");
@@ -131,6 +130,11 @@ class iGetIt {
             return 1;
         }
         return $negative/($positive+$negative);
+    }
+    public function resetVotes($dbconn){
+        pg_prepare($dbconn, "negativeResponse", "UPDATE classes SET igetit=0, idontgetit=0 WHERE CONCAT(name, ' ', instructor) = $1");
+        pg_execute($dbconn, "negativeResponse", array($this->current_course));
+
     }
     public function resetCurrentClass(){
         $this->current_course="";

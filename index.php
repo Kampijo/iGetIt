@@ -238,7 +238,7 @@ switch ($_SESSION['state']) {
 
         // check if submit or not
         if (empty($_REQUEST['submit']) || ($_REQUEST['submit'] != "Submit" && $_REQUEST['submit'] != "Class"
-                && $_REQUEST['submit'] != "Profile" && $_REQUEST['submit'] != "Logout")
+                && $_REQUEST['submit'] != "Profile" && $_REQUEST['submit'] != "Logout" && $_REQUEST['submit'] != "Reset")
         ) {
             break;
         }
@@ -257,6 +257,9 @@ switch ($_SESSION['state']) {
             session_destroy();
             header("Refresh:0");
             break;
+        } else {
+            $_SESSION['iGetIt']->resetVotes($dbconn);
+            header("Refresh:0");
         }
 
         break;
