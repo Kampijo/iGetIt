@@ -32,7 +32,7 @@
 </nav>
 <main>
     <h1>Profile</h1>
-    <form method=post novalidate>
+    <form method=post>
         <fieldset>
             <legend>Edit Profile</legend>
             <p><label for="user">User</label> <input type="text" name="user" value="<?php echo($user); ?>"></p>

@@ -27,11 +27,14 @@ class iGetIt {
         $this->newuser=false;
     }
 	public function checkLogin($dbconn, $user, $password){
-        $user=sanitizeInput($user);
         $password=sanitizeInput($password);
-        $result = pg_prepare($dbconn, "loginQuery", "SELECT * FROM appuser where username=$1 and password=$2");
-        $result = pg_execute($dbconn, "loginQuery", array($user, $password));
-        return pg_fetch_array($result);
+
+        $row = checkUser($dbconn, $user);
+        if(password_verify($password, $row['password'])){
+            return $row;
+        } else {
+            return FALSE;
+        }
 	}
     public function checkUser($dbconn, $user){
 	    $user=sanitizeInput($user);
@@ -43,6 +46,7 @@ class iGetIt {
 
         $user=sanitizeInput($user);
         $password=sanitizeInput($password);
+        $password=password_hash($password, "PASSWORD_DEFAULT");
         $fName=sanitizeInput($fName);
         $lName=sanitizeInput($lName);
         $email=sanitizeInput($email);
@@ -61,6 +65,7 @@ class iGetIt {
         $this->email=$email;
 
         if(!empty($password)) {
+            $password=password_hash($password, "PASSWORD_DEFAULT");
             pg_prepare($dbconn, "updateProfile", "UPDATE appuser SET password=$1, fname=$2, lname=$3, email=$4 WHERE username = $5");
             pg_execute($dbconn, "updateProfile", array($password, $fName, $lName, $email, $this->user));
         } else {

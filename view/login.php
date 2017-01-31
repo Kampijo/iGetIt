@@ -21,7 +21,7 @@ $_REQUEST['user'] = !empty($_REQUEST['user']) ? $_REQUEST['user'] : '';
 -->
 <main>
     <h1>Login</h1>
-    <form method="post" novalidate>
+    <form method="post">
         <fieldset>
             <legend>Login</legend>
             <p><label for="user">User</label> <input type="text" name="user" value="<?php echo($_REQUEST['user']); ?>">
