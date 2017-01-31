@@ -8,7 +8,7 @@ $negative = $_SESSION['iGetIt']->getNegativePercent($dbconn) * 100;
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css"/>
-    <meta http-equiv="refresh" content="30">
+    <meta http-equiv="refresh" content="10">
     <style>
         span {
             background-color: green;
@@ -35,8 +35,8 @@ $negative = $_SESSION['iGetIt']->getNegativePercent($dbconn) * 100;
     <h1>Class</h1>
         <fieldset>
             <legend> <?php echo($_SESSION['iGetIt']->current_course) ?></legend>
-            I Get It (<?php echo(round($positive)) ?>%)<span style="background-color:green; width:<?php echo($positive) ?>%;"></span>
-            I Don't Get It (<?php echo(round($negative)) ?>%)<span style="background-color:red;  width:<?php echo($negative) ?>%;"></span>
+            I Get It (<?php echo(round($positive,1)) ?>%)<span style="background-color:green; width:<?php echo($positive) ?>%;"></span>
+            I Don't Get It (<?php echo(round($negative,1)) ?>%)<span style="background-color:red;  width:<?php echo($negative) ?>%;"></span>
         </fieldset>
 <form method="post">
     <input type="submit" name="submit" value="Reset"/>
