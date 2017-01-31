@@ -8,6 +8,5 @@ sed -i "s/dbnamehere/$dbname/g" dbconn.php
 sed -i "s/userhere/$utorid/g" dbconn.php
 sed -i "s/passwordhere/$password/g" dbconn.php
 
-echo -e "\n"
-PGPASSWORD=$password
+export PGPASSWORD=$password
 psql -h mcsdb.utm.utoronto.ca -d $dbname -U $utorid -f schema.sql
